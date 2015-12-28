@@ -29,6 +29,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     UserEntry.COLUMN_EINSTELLUNGEN_FK + " INTEGER," +
                     "FOREIGN KEY(" + UserEntry.COLUMN_EINSTELLUNGEN_FK + ") REFERENCES " + EinstellungenEntry.TABLE_NAME + "(" + EinstellungenEntry._ID + ")" +
                     ")";
+
     private static final String SQL_CREATE_TABLE_CONTENT =
             "CREATE TABLE " + ContentEntry.TABLE_NAME + " (" +
                     ContentEntry._ID + " INTEGER PRIMARY KEY," +
@@ -39,6 +40,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
                     ContentEntry.COLUMN_NAME_IMDBSCORE + " DOUBLE," +
                     ContentEntry.COLUMN_NAME_BILD_PFAD + " TEXT" + ")";
+
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
             "CREATE TABLE " + EinstellungenEntry.TABLE_NAME + " (" +
                     EinstellungenEntry._ID + " INTEGER PRIMARY KEY," +
