@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">StreamingBlitz</string>
+    <string name="app_registrierung">Registrierung</string>
+    <string name="app_lostpassword">Passwort senden</string>
+    <string name="app_suche">Titelsuche</string>
+    <string name="app_suchergebnis">Suchergebnis</string>
+    <string name="app_contentdetails">Details</string>
+    <string name="app_scan">Titel scannen</string>
+    <string name="app_einstellungen">Einstellungen</string>
+
+    <!-- Strings für den Login -->
+    <string name="prompt_email">Email/Username</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="error_invalid_email">Bitte eine E-Mail Adresse eingeben</string>
+    <string name="error_invalid_password">Das Passwort ist zu kurz</string>
+    <string name="error_incorrect_password">Falsches Passwort</string>
+    <string name="error_field_required">Pflichtfeld</string>
+    <string name="permission_rationale">"Diese Anwendung benötigt Zugriff auf Ihre Kontakte"
+    </string>
+    <string name="action_login_register">Registrieren</string>
+    <string name="action_login_lostpassword">Passwort vergessen?</string>
+
+    <!-- Strings für die Beutzerregistrierung -->
+    <string name="prompt_register_username">Benutzername</string>
+    <string name="prompt_register_email">E-Mail</string>
+    <string name="prompt_register_password">Passwort</string>
+    <string name="action_register_anlegen">Account anlegen</string>
+    <string name="action_register_loeschen">Account löschen</string>
+
+    <!-- Strings für Passwort vergessen -->
+    <string name="action_lostpassword_senden">Senden</string>
+
+    <!-- Strings für Titelsuche -->
+    <string name="action_suche_blitzsuche">Blitz Suche</string>
+    <string name="action_suche_blitzscan">Blitz Scan</string>
+    <string name="prompt_suche_filmserie">Film oder Serie</string>
+
+    <!-- Strings für Suchergebnis -->
+    <string name="action_suchergebnis_blitzscan">Blitz Scan</string>
+    <string name="title_activity_login">Login</string>
+</resources>

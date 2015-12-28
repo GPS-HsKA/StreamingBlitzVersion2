@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_suche_filmserie_"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp"
+        android:hint="@string/prompt_suche_filmserie"
+        android:drawableLeft="@drawable/lupe_icon"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_suche_blitzsuche"
+        android:layout_below="@+id/edit_suche_filmserie_"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:hint="@string/action_suche_blitzsuche"
+        android:drawableLeft="@drawable/blitz_icon"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_suche_blitzscan"
+        android:layout_below="@+id/button_suche_blitzsuche"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:hint="@string/action_suche_blitzscan"
+        android:drawableLeft="@drawable/blitz_icon"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:onClick="showPopup"
+        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
+
+
+    <!--android:src="@drawable/ic_overflow_holo_dark"-->
+    <!--android:contentDescription="@string/descr_overflow_button"-->
