@@ -209,10 +209,12 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_USER);
         db.execSQL(SQL_CREATE_TABLE_EINSTELLUNGEN);
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
-        String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'Hans', 'password','Mail', 1);";
+        String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 'Mail', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
+        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " Values (1, 'Batman', 'Action', '120 min', 1, 1, 9.2, 'Batman.pic');";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
+        db.execSQL(ROW4);
     }
 
     @Override

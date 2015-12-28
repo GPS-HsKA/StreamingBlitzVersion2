@@ -24,7 +24,7 @@ import hska.streamingblitzv2.util.ContentMapper;
 public class ContentListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SQLITE_LOADER = 0;
-    private static final String PARCEL_CONTACT = "hska.streamingblitzv2.model.Content";
+    private static final String PARCEL_CONTENT = "hska.streamingblitzv2.model.Content";
 
     private SimpleCursorAdapter adapter;
     private ListView contentList;
@@ -83,7 +83,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SQLiteCursor cursor = (SQLiteCursor) parent.getItemAtPosition(position);
                 Intent detailIntent = new Intent(ContentListActivity.this, ContentDetailActivity.class);
-                detailIntent.putExtra(PARCEL_CONTACT, ContentMapper.map(cursor));
+                detailIntent.putExtra(PARCEL_CONTENT, ContentMapper.map(cursor));
                 startActivity(detailIntent);
             }
         });
