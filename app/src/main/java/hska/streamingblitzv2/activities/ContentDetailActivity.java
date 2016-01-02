@@ -44,8 +44,8 @@ public class ContentDetailActivity extends AppCompatActivity {
     }
 
     private void initHeaderContent() {
-        ((TextView) findViewById(R.id.contactFirstname)).setText(content.getName());
-        ((TextView) findViewById(R.id.contactLastname)).setText(content.getGenre());
+        ((TextView) findViewById(R.id.contentName)).setText(content.getName());
+        ((TextView) findViewById(R.id.contentGenre)).setText(content.getGenre());
     }
 
     private void deleteContent() {

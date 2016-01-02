@@ -6,15 +6,20 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 import hska.streamingblitzv2.R;
 import hska.streamingblitzv2.dao.ContactsDBHelper;
@@ -38,6 +43,12 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
         initAdapter();
         getLoaderManager().initLoader(SQLITE_LOADER, null, this);
+
+        // Anzeige einer zufälligen Werbung auf der Seite
+        int[] werbungimages = new int[] {R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
+        ImageView mImageView = (ImageView)findViewById(R.id.werbungimageview);
+        int imageId = (int)(Math.random() * werbungimages.length);
+        mImageView.setBackgroundResource(werbungimages[imageId]);
     }
 
     @Override
@@ -73,8 +84,8 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void initAdapter() {
-        String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME};
-        int[] toViews = {android.R.id.text1};
+        String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME, ContentEntry.COLUMN_NAME_GENRE};
+        int[] toViews = {android.R.id.text1, android.R.id.text2};
         adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null,fromColumns,toViews, 0);
         contentList = (ListView) findViewById(R.id.listView_contentList);
         contentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
