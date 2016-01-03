@@ -11,24 +11,24 @@ public class Content implements Parcelable {
 
     }
 
-    public Content(String name, String genre, String laufzeit, Integer serie, Integer film, Double imdbScore, Uri image) {
+    public Content(String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore) {
         this.name = name;
         this.genre = genre;
         this.laufzeit = laufzeit;
         this.serie = serie;
         this.film = film;
         this.imdbScore = imdbScore;
-        this.image = image;
     }
 
     private long id;
+
     private Uri image;
     private String name;
     private String genre;
     private String laufzeit;
     private Integer serie;
     private Integer film;
-    private Double imdbScore;
+    private String imdbScore;
 
     public long getId() {
         return id;
@@ -78,20 +78,20 @@ public class Content implements Parcelable {
         this.film = film;
     }
 
-    public Double getImdbScore() {
+    public String getImdbScore() {
         return imdbScore;
     }
 
-    public void setImdbScore(double imdbScore) {
+    public void setImdbScore(String imdbScore) {
         this.imdbScore = imdbScore;
-    }
-
-    public Uri getBild() {
-        return image;
     }
 
     public void setImage(Uri image) {
         this.image = image;
+    }
+
+    public Uri getImage() {
+        return image;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Content implements Parcelable {
         dest.writeString(genre);
         dest.writeString(image.getPath());
         dest.writeString(laufzeit);
-        dest.writeDouble(imdbScore);
+        dest.writeString(imdbScore);
         dest.writeInt(serie);
         dest.writeInt(film);
     }
@@ -143,7 +143,7 @@ public class Content implements Parcelable {
         genre = in.readString();
         image = Uri.parse(in.readString());
         laufzeit = in.readString();
-        imdbScore = in.readDouble();
+        imdbScore = in.readString();
         film = in.readInt();
         serie = in.readInt();
     }

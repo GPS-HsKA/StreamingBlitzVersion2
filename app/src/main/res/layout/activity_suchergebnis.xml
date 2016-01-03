@@ -13,15 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_suchergebnis_blitzscan"
-        android:layout_below="@+id/listView_contentList"
-        android:layout_centerHorizontal="true"
         android:hint="@string/action_suchergebnis_blitzscan"
-        android:drawableLeft="@drawable/blitz_icon" />
+        android:drawableLeft="@drawable/blitz_icon"
+        android:layout_above="@+id/werbungimageview"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="800px"
+        android:layout_height="250px"
         android:id="@+id/werbungimageview"
-        android:layout_below="@+id/button_suchergebnis_blitzscan"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

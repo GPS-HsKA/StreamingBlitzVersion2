@@ -38,7 +38,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_LAUFZEIT + " TEXT," +
                     ContentEntry.COLUMN_NAME_SERIE + " INTEGER," +
                     ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
-                    ContentEntry.COLUMN_NAME_IMDBSCORE + " DOUBLE," +
+                    ContentEntry.COLUMN_NAME_IMDBSCORE + " TEXT," +
                     ContentEntry.COLUMN_NAME_BILD_PFAD + " TEXT" + ")";
 
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
@@ -192,7 +192,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(UserEntry.COLUMN_NAME_USERNAME, user.getUsername());
         values.put(UserEntry.COLUMN_NAME_MAIL, user.getMail());
-        values.put(UserEntry.COLUMN_NAME_MAIL, user.getMail());
+        values.put(UserEntry.COLUMN_NAME_PASSWORT, user.getPasswort());
 
         return values;
     }
@@ -213,7 +213,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
         String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 'Mail', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
-        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " Values (1, 'Batman', 'Action', '120 min', 1, 1, 9.2, 'Batman.pic');";
+        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " Values (1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png');";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
         db.execSQL(ROW4);

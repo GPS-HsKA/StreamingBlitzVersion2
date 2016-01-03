@@ -18,7 +18,7 @@ public class ContentMapper {
         contact.setLaufzeit(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_LAUFZEIT)));
         contact.setFilm(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_FILM)));
         contact.setSerie(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_SERIE)));
-        contact.setImdbScore(cursor.getDouble(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_IMDBSCORE)));
+        contact.setImdbScore(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_IMDBSCORE)));
 
         return contact;
     }

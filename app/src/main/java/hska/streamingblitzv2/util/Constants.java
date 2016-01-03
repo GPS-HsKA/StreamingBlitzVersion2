@@ -3,9 +3,9 @@ package hska.streamingblitzv2.util;
 public class Constants {
 
     //Parcel keys
-    public static final String PARCEL_USER = "hska.streamingblitzv2.model.USER";
-    public static final String PARCEL_CONTENT = "hska.streamingblitzv2.model.CONTENT";
-    public static final String PARCEL_EINSTELLUNGEN = "hska.streamingblitzv2.model.EINSTELLUNGEN";
+    public static final String PARCEL_USER = "hska.streamingblitzv2.model.User";
+    public static final String PARCEL_CONTENT = "hska.streamingblitzv2.model.Content";
+    public static final String PARCEL_EINSTELLUNGEN = "hska.streamingblitzv2.model.Einstellungen";
 
     //Activity request codes
     public static final int REQUEST_IMAGE_CAPTURE = 0;
