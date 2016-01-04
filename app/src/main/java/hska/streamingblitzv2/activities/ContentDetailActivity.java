@@ -14,8 +14,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.io.File;
@@ -60,57 +63,15 @@ public class ContentDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.contentdetail_imdbscore)).setText(content.getImdbScore());
     }
 
-    private void deleteContent() {
-        DeleteContentTask deleteTask = new DeleteContentTask(this);
-        deleteTask.execute(content);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_content_details, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                Dialog confirmDialog = createConfirmDialog();
-                confirmDialog.show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return true;
     }
 
     @Override
     public void onBackPressed() {
         Intent listIntent = new Intent(this, ContentListActivity.class);
-        /*
-        if(getCallingActivity().getClassName().equals("ContactListActivity")) {
-            listIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        }
-        */
         startActivity(listIntent);
-    }
-
-    private Dialog createConfirmDialog() {
-        AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(this);
-        builder.setTitle(DIALOG_DELETE_TITLE)
-                .setMessage(DIALOG_DELETE_MESSAGE)
-                .setPositiveButton(DIALOG_DELETE_POSITIVE, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteContent();
-                    }
-                })
-                .setNegativeButton(DIALOG_DELETE_NEGATIVE, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        return builder.create();
     }
 }

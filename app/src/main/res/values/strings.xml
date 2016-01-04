@@ -46,4 +46,8 @@
     <string name="prompt_laufzeit">Laufzeit:</string>
     <string name="prompt_streaming">Streaming</string>
     <string name="prompt_kauf">Kauf</string>
+
+    <!--Strings für Suche-->
+    <string name="prompt_hint">Suche von Content</string>
+
 </resources>

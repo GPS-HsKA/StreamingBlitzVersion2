@@ -1,6 +1,7 @@
 package hska.streamingblitzv2.activities;
 
 import android.app.LoaderManager;
+import android.app.SearchManager;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -35,52 +36,33 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     private ListView contentList;
     private SearchView searchField;
     private int backButtonCount = 0;
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suchergebnis);
 
+        Intent intent = getIntent();
+
+        query = intent.getStringExtra(SucheActivity.EXTRA_MESSAGE);
+
         initAdapter();
+
         getLoaderManager().initLoader(SQLITE_LOADER, null, this);
 
-        // Anzeige einer zufälligen Werbung auf der Seite
-        int[] werbungimages = new int[] {R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
-        ImageView mImageView = (ImageView)findViewById(R.id.werbungimageview);
-        int imageId = (int)(Math.random() * werbungimages.length);
-        mImageView.setBackgroundResource(werbungimages[imageId]);
-    }
+            // Anzeige einer zufälligen Werbung auf der Seite
+            int[] werbungimages = new int[]{R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
+            ImageView mImageView = (ImageView) findViewById(R.id.werbungimageview);
+            int imageId = (int) (Math.random() * werbungimages.length);
+            mImageView.setBackgroundResource(werbungimages[imageId]);
+        }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_suchergebnis, menu);
-
-        searchField = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Cursor result = ContactsDBHelper.getInstance(ContentListActivity.this).findContentByName(query);
-                adapter.changeCursor(result);
-                if (result.getCount() == 0) {
-                    Toast.makeText(ContentListActivity.this, "Es wurde kein Film oder Serie gefunden!", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        searchField.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                getLoaderManager().restartLoader(SQLITE_LOADER, null, ContentListActivity.this);
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_content_details, menu);
+        return true;
     }
 
     private void initAdapter() {
@@ -110,7 +92,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
                     @Override
                     public Cursor loadInBackground() {
-                        return ContactsDBHelper.getInstance(ContentListActivity.this).findAllContent();
+                        return ContactsDBHelper.getInstance(ContentListActivity.this).findContentByName(query);
                     }
                 };
             default:
@@ -126,23 +108,5 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         adapter.changeCursor(null);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        if(backButtonCount >= 1)
-        {
-            backButtonCount = 0;
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "Press again to exit the application", Toast.LENGTH_SHORT).show();
-            backButtonCount++;
-        }
     }
 }

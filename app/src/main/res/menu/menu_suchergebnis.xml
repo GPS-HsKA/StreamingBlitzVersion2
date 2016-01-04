@@ -2,12 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:hint="@string/prompt_suche_filmserie"
-        app:showAsAction="ifRoom"
-        app:actionViewClass="android.widget.SearchView"
-        android:title="Search"/>
+    <item   android:id="@+id/menu_history"
+            android:title="History"
+            android:showAsAction="ifRoom"/>
+    <item   android:id="@+id/menu_scanner"
+            android:title="Scanner"
+            android:showAsAction="ifRoom"/>
+    <item   android:id="@+id/menu_hilfe"
+            android:title="Hilfe"
+            android:showAsAction="ifRoom"/>
+    <item   android:id="@+id/menu_einstellungen"
+            android:title="Einstellungen"
+            android:showAsAction="ifRoom"/>
 
 </menu>

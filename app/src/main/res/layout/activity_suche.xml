@@ -3,45 +3,48 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_suche_filmserie_"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"
-        android:hint="@string/prompt_suche_filmserie"
-        android:drawableLeft="@drawable/lupe_icon"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_suche_blitzsuche"
-        android:layout_below="@+id/edit_suche_filmserie_"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:hint="@string/action_suche_blitzsuche"
-        android:drawableLeft="@drawable/blitz_icon"/>
+        android:id="@+id/editText_suche"
+        android:hint="Suche" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_suche_blitzscan"
-        android:layout_below="@+id/button_suche_blitzsuche"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="124dp"
-        android:hint="@string/action_suche_blitzscan"
-        android:drawableLeft="@drawable/blitz_icon"/>
+        android:paddingLeft="135dp"
+        android:paddingTop="80dp">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:onClick="showPopup"
-        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_suche_blitzscan"
+                android:layout_below="@+id/button_suche_blitzsuche"
+                android:layout_marginTop="124dp"
+                android:hint="@string/action_suche_blitzscan"
+                android:drawableLeft="@drawable/blitz_icon" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blitz Suche"
+                android:id="@+id/button_blitzsuche"
+                android:layout_column="9"
+                android:onClick="sendMessage"/>
+        </TableRow>
+
+    </TableLayout>
+
 </RelativeLayout>
 
 

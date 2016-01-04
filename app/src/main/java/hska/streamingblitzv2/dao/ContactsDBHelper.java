@@ -98,7 +98,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         String[] whereArgs = new String[]{name + "%"};
         String sortOrder = ContentEntry.COLUMN_NAME_NAME + " ASC";
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(UserEntry.TABLE_NAME);
+        qb.setTables(ContentEntry.TABLE_NAME);
         return qb.query(getReadableDatabase(),null,whereClause, whereArgs, null, null, sortOrder);
     }
 
@@ -213,7 +213,14 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
         String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 'Mail', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
-        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " Values (1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png');";
+        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
+                " Values " +
+                "(1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
+                "(2, 'Batman Begins', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
+                "(3, 'Batman The Dark Night', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
+                "(4, 'Zoolander', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
+                "(5, 'Interstellar', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
+                "(6, 'Star Wars Das Erwachen der Macht', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png');";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
         db.execSQL(ROW4);
