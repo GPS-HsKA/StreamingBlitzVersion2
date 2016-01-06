@@ -2,6 +2,7 @@ package hska.streamingblitzv2.activities;
 
 import android.app.LoaderManager;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -12,15 +13,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
 
 import hska.streamingblitzv2.R;
 import hska.streamingblitzv2.dao.ContactsDBHelper;
@@ -34,7 +33,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
     private SimpleCursorAdapter adapter;
     private ListView contentList;
-    private SearchView searchField;
+    private android.support.v7.widget.SearchView searchField;
     private int backButtonCount = 0;
     private String query;
 
@@ -44,8 +43,12 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         setContentView(R.layout.activity_suchergebnis);
 
         Intent intent = getIntent();
-
-        query = intent.getStringExtra(SucheActivity.EXTRA_MESSAGE);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            query = intent.getStringExtra(SearchManager.QUERY);
+        }
+        else {
+            query = intent.getStringExtra(SucheActivity.EXTRA_MESSAGE);
+        }
 
         initAdapter();
 
@@ -61,8 +64,19 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_content_details, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_suchergebnis, menu);
+
+        // Get the SearchView and set the searchable configuration
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        android.support.v7.widget.SearchView searchView =
+                (android.support.v7.widget.SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void initAdapter() {
@@ -108,5 +122,56 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         adapter.changeCursor(null);
+    }
+
+    public void switchToScan(View view){
+        startActivity(new Intent(ContentListActivity.this, ScanActivity.class));
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_history:
+                showHistory();
+                break;
+            case R.id.menu_scanner:
+                showScanner();
+                break;
+            case R.id.menu_hilfe:
+                showHilfe();
+                break;
+            case R.id.menu_einstellungen:
+                showEinstellungen();
+                break;
+
+            default:
+                break;
+        }
+        return false;
+    }
+
+    protected void showHistory()
+    {
+        Intent i = new Intent(this, HistoryActivity.class);
+        startActivity(i);
+    }
+
+    protected void showScanner()
+    {
+        Intent i = new Intent(this, ScanActivity.class);
+        startActivity(i);
+    }
+
+    protected void showHilfe()
+    {
+        Intent i = new Intent(this, HilfeActivity.class);
+        startActivity(i);
+    }
+
+    protected void showEinstellungen()
+    {
+        Intent i = new Intent(this, EinstellungenActivity.class);
+        startActivity(i);
+
     }
 }

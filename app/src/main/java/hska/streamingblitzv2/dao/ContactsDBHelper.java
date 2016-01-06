@@ -6,9 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+
+import hska.streamingblitzv2.R;
+import hska.streamingblitzv2.activities.LoginActivity;
 import hska.streamingblitzv2.dao.DatabaseSchema.UserEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.ContentEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.EinstellungenEntry;
@@ -39,7 +46,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_SERIE + " INTEGER," +
                     ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
                     ContentEntry.COLUMN_NAME_IMDBSCORE + " TEXT," +
-                    ContentEntry.COLUMN_NAME_BILD_PFAD + " TEXT" + ")";
+                    ContentEntry.COLUMN_NAME_BILD_PFAD + " BLOB" + ")";
 
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
             "CREATE TABLE " + EinstellungenEntry.TABLE_NAME + " (" +
@@ -208,6 +215,15 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // get image from drawable
+        Bitmap image1 = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.amazon_logo);
+
+        // convert bitmap to byte
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image1.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageInByte1 = stream.toByteArray();
+
         db.execSQL(SQL_CREATE_TABLE_USER);
         db.execSQL(SQL_CREATE_TABLE_EINSTELLUNGEN);
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
@@ -215,12 +231,12 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
         String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
                 " Values " +
-                "(1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
-                "(2, 'Batman Begins', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
-                "(3, 'Batman The Dark Night', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
-                "(4, 'Zoolander', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
-                "(5, 'Interstellar', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png')," +
-                "(6, 'Star Wars Das Erwachen der Macht', 'Action', '120 min', 1, 1, '9.2' , 'drawable/blitz_icon.png');";
+                "(1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
+                "(2, 'Batman Begins', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
+                "(3, 'Batman The Dark Night', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
+                "(4, 'Zoolander', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
+                "(5, 'Interstellar', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
+                "(6, 'Star Wars Das Erwachen der Macht', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ");";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
         db.execSQL(ROW4);

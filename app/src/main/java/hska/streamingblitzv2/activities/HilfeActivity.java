@@ -7,42 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import hska.streamingblitzv2.R;
 
-
-public class SucheActivity extends AppCompatActivity {
-
-    public final static String EXTRA_MESSAGE = "";
-
+public class HilfeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suche);
-
-
-        Button suchergebnis_blitzscan = (Button) findViewById(R.id.button_suche_blitzscan);
-        suchergebnis_blitzscan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SucheActivity.this, ScanActivity.class));
-            }
-        });
-    }
-
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, ContentListActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText_suche);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        setContentView(R.layout.activity_hilfe);
     }
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
-        getMenuInflater().inflate(R.menu.menu_suche, menu);
+        getMenuInflater().inflate(R.menu.menu_hilfe, menu);
         return true;
     }
 

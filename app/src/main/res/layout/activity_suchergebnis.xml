@@ -15,8 +15,19 @@
         android:id="@+id/button_suchergebnis_blitzscan"
         android:hint="@string/action_suchergebnis_blitzscan"
         android:drawableLeft="@drawable/blitz_icon"
-        android:layout_above="@+id/werbungimageview"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:onClick="switchToScan"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Werbung"
+        android:id="@+id/textView9"
+        android:layout_alignTop="@+id/werbungimageview"
+        android:layout_alignParentStart="true"
+        android:textSize="10dp" />
 
     <ImageView
         android:layout_width="800px"

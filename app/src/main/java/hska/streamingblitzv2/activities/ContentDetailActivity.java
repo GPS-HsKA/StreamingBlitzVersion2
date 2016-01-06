@@ -1,36 +1,22 @@
 package hska.streamingblitzv2.activities;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import java.io.File;
-
 import hska.streamingblitzv2.R;
+import hska.streamingblitzv2.dao.DatabaseSchema;
 import hska.streamingblitzv2.model.Content;
-import hska.streamingblitzv2.tasks.DeleteContentTask;
 
-import static hska.streamingblitzv2.util.Constants.DIALOG_DELETE_MESSAGE;
-import static hska.streamingblitzv2.util.Constants.DIALOG_DELETE_NEGATIVE;
-import static hska.streamingblitzv2.util.Constants.DIALOG_DELETE_POSITIVE;
-import static hska.streamingblitzv2.util.Constants.DIALOG_DELETE_TITLE;
 import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;
 
 public class ContentDetailActivity extends AppCompatActivity {
@@ -54,9 +40,8 @@ public class ContentDetailActivity extends AppCompatActivity {
     }
 
     private void initHeaderContent() {
-        imageView = (ImageView) findViewById(R.id.contentdetail_movieimage);
-            Bitmap myBitmap = BitmapFactory.decodeFile(content.getImage().getPath());
-            imageView.setImageBitmap(myBitmap);
+        ImageView imageView = (ImageView) findViewById(R.id.contentdetail_movieimage);
+        imageView.setImageBitmap(BitmapFactory.decodeByteArray(content.getImage(), 0, content.getImage().length));
         ((TextView) findViewById(R.id.contentdetail_title)).setText(content.getName());
         ((TextView) findViewById(R.id.contentdetail_genre)).setText(content.getGenre());
         ((TextView) findViewById(R.id.contentdetail_laufzeit)).setText(content.getLaufzeit());
@@ -65,13 +50,63 @@ public class ContentDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_content_details, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_content_details, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        android.support.v7.widget.SearchView searchView =
+                (android.support.v7.widget.SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent listIntent = new Intent(this, ContentListActivity.class);
-        startActivity(listIntent);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_history:
+                showHistory();
+                break;
+            case R.id.menu_scanner:
+                showScanner();
+                break;
+            case R.id.menu_hilfe:
+                showHilfe();
+                break;
+            case R.id.menu_einstellungen:
+                showEinstellungen();
+                break;
+
+            default:
+                break;
+        }
+        return false;
+    }
+
+    protected void showHistory()
+    {
+        Intent i = new Intent(this, HistoryActivity.class);
+        startActivity(i);
+    }
+
+    protected void showScanner()
+    {
+        Intent i = new Intent(this, ScanActivity.class);
+        startActivity(i);
+    }
+
+    protected void showHilfe()
+    {
+        Intent i = new Intent(this, HilfeActivity.class);
+        startActivity(i);
+    }
+
+    protected void showEinstellungen()
+    {
+        Intent i = new Intent(this, EinstellungenActivity.class);
+        startActivity(i);
+
     }
 }
