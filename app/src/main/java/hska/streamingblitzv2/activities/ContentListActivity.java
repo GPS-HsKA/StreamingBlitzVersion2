@@ -80,7 +80,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void initAdapter() {
-        String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME, ContentEntry.COLUMN_NAME_GENRE};
+        String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME, ContentEntry.COLUMN_NAME_JAHR};
         int[] toViews = {android.R.id.text1, android.R.id.text2};
         adapter = new SimpleCursorAdapter(this, android.R.layout.simple_expandable_list_item_2, null,fromColumns,toViews, 0);
         contentList = (ListView) findViewById(R.id.listView_contentList);

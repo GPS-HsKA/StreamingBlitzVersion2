@@ -12,57 +12,17 @@
         android:textSize="10dp"
         android:layout_marginTop="425dp" />
 
-    <ImageView
-        android:layout_width="1080px"
-        android:layout_height="400px"
-        android:id="@+id/contentdetail_placeholder1"
-        android:src="@drawable/placeholder_grey"
-        android:layout_below="@+id/contentdetail_title"
-        android:layout_alignParentStart="true"
-        android:visibility="visible" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/prompt_genre"
-        android:id="@+id/textView6"
-        android:layout_marginTop="79dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="132dp"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/prompt_laufzeit"
-        android:id="@+id/textView7"
-        android:textColor="#000000"
-        android:layout_below="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/imageView4"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/imdb_logo"
-        android:layout_below="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
-
     <TextView
         android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="title"
         android:id="@+id/contentdetail_title"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10px"
         android:layout_alignParentTop="false"
         android:layout_toStartOf="@+id/textView6"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="10px"
         android:textStyle="bold"
         android:layout_alignParentEnd="true" />
 
@@ -72,48 +32,101 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="jahr"
         android:id="@+id/contentdetail_jahr"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="35px"
         android:layout_alignParentTop="false"
-        android:layout_toStartOf="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="false"
+        android:layout_marginLeft="10px"
+        android:layout_alignParentEnd="false"
+        android:textStyle="italic" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/contentdetail_imdbscore"
-        android:textColor="#000000"
-        android:text="imdb_score"
-        android:textIsSelectable="false"
-        android:layout_toEndOf="@+id/imageView4"
-        android:layout_marginStart="5dp"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_marginTop="12dp" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="270px"
+        android:background="#c1c1c1"
+        android:layout_marginTop="100px">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="genre"
-        android:id="@+id/contentdetail_genre"
-        android:textColor="#000000"
-        android:layout_above="@+id/contentdetail_laufzeit"
-        android:layout_alignStart="@+id/contentdetail_laufzeit" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="laufzeit"
-        android:id="@+id/contentdetail_laufzeit"
-        android:textColor="#000000"
-        android:layout_alignBaseline="@+id/textView7"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7"
-        android:layout_marginStart="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/prompt_laufzeit"
+                android:id="@+id/textView7"
+                android:textColor="#000000"
+                android:layout_below="@+id/textView6"
+                android:layout_alignStart="@+id/textView6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="laufzeit"
+                android:id="@+id/contentdetail_laufzeit"
+                android:textColor="#000000"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_toEndOf="@+id/textView7"
+                android:layout_marginStart="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/prompt_genre"
+                android:id="@+id/textView6"
+                android:layout_marginTop="79dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="132dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="genre"
+                android:id="@+id/contentdetail_genre"
+                android:textColor="#000000"
+                android:layout_above="@+id/contentdetail_laufzeit"
+                android:layout_alignStart="@+id/contentdetail_laufzeit" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView4"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/imdb_logo"
+                android:layout_below="@+id/textView7"
+                android:layout_alignStart="@+id/textView7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/contentdetail_imdbscore"
+                android:textColor="#000000"
+                android:text="imdb_score"
+                android:textIsSelectable="false"
+                android:layout_toEndOf="@+id/imageView4"
+                android:layout_marginStart="5dp"
+                android:layout_alignTop="@+id/imageView4"
+                android:layout_marginTop="12dp" />
+        </TableRow>
+
+    </TableLayout>
 
 
     <LinearLayout
