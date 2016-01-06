@@ -24,6 +24,7 @@ public final class DatabaseSchema {
         public static final String COLUMN_NAME_SERIE = "content_serie";
         public static final String COLUMN_NAME_FILM = "content_film";
         public static final String COLUMN_NAME_IMDBSCORE = "content_imdbscore";
+        public static final String COLUMN_NAME_JAHR = "content_jahr";
         public static final String COLUMN_NAME_BILD_PFAD = "content_bild";
     }
 

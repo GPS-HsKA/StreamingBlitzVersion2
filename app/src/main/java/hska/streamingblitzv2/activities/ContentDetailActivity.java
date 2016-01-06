@@ -40,12 +40,16 @@ public class ContentDetailActivity extends AppCompatActivity {
     }
 
     private void initHeaderContent() {
-        ImageView imageView = (ImageView) findViewById(R.id.contentdetail_movieimage);
-        imageView.setImageBitmap(BitmapFactory.decodeByteArray(content.getImage(), 0, content.getImage().length));
+        int[] images = new int[] {R.drawable.amazon_logo, R.drawable.itunes_logo, R.drawable.netflix_icon};
+        ImageView mImageView = (ImageView)findViewById(R.id.contentdetail_movieimage);
+        int imageId = (int)(Math.random() * images.length);
+        mImageView.setBackgroundResource(images[imageId]);
+        // BitmapFactory.decodeByteArray(content.getImage(), 0, content.getImage().length)
         ((TextView) findViewById(R.id.contentdetail_title)).setText(content.getName());
         ((TextView) findViewById(R.id.contentdetail_genre)).setText(content.getGenre());
         ((TextView) findViewById(R.id.contentdetail_laufzeit)).setText(content.getLaufzeit());
         ((TextView) findViewById(R.id.contentdetail_imdbscore)).setText(content.getImdbScore());
+        ((TextView) findViewById(R.id.contentdetail_jahr)).setText(content.getJahr());
     }
 
     @Override

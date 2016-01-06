@@ -3,6 +3,7 @@ package hska.streamingblitzv2.model;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v7.widget.SearchView;
 
 
 public class Content implements Parcelable {
@@ -11,7 +12,7 @@ public class Content implements Parcelable {
 
     }
 
-    public Content(Long id, String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore, byte[] image) {
+    public Content(Long id, String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore, String jahr, byte[] image) {
         this._id = id;
         this.name = name;
         this.genre = genre;
@@ -19,6 +20,7 @@ public class Content implements Parcelable {
         this.serie = serie;
         this.film = film;
         this.imdbScore = imdbScore;
+        this.jahr = jahr;
         this.image = image;
     }
 
@@ -29,6 +31,7 @@ public class Content implements Parcelable {
     private Integer serie;
     private Integer film;
     private String imdbScore;
+    private String jahr;
     private byte[] image;
 
     public long getId() {
@@ -91,6 +94,13 @@ public class Content implements Parcelable {
         this.image = image;
     }
 
+    public String getJahr() {
+        return jahr;
+    }
+
+    public void setJahr(String jahr) {
+        this.jahr = jahr;
+    }
     public byte[] getImage() {
         return image;
     }
@@ -106,6 +116,7 @@ public class Content implements Parcelable {
                 ", Serie='" + serie + '\'' +
                 ", Film=" + film + '\'' +
                 ", ImdbScore=" + imdbScore +
+                ", Jahr=" + jahr +
                 '}';
     }
 
@@ -125,6 +136,7 @@ public class Content implements Parcelable {
         dest.writeString(imdbScore);
         dest.writeInt(serie);
         dest.writeInt(film);
+        dest.writeString(jahr);
     }
 
     public static final Parcelable.Creator<Content> CREATOR
@@ -149,5 +161,6 @@ public class Content implements Parcelable {
         imdbScore = in.readString();
         film = in.readInt();
         serie = in.readInt();
+        jahr = in.readString();
     }
 }

@@ -46,6 +46,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_SERIE + " INTEGER," +
                     ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
                     ContentEntry.COLUMN_NAME_IMDBSCORE + " TEXT," +
+                    ContentEntry.COLUMN_NAME_JAHR + " TEXT," +
                     ContentEntry.COLUMN_NAME_BILD_PFAD + " BLOB" + ")";
 
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
@@ -229,14 +230,15 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
         String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 'Mail', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
-        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
+        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_JAHR + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
                 " Values " +
-                "(1, 'Batman', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
-                "(2, 'Batman Begins', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
-                "(3, 'Batman The Dark Night', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
-                "(4, 'Zoolander', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
-                "(5, 'Interstellar', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ")," +
-                "(6, 'Star Wars Das Erwachen der Macht', 'Action', '120 min', 1, 1, '9.2' , " + "'" + imageInByte1 + "'" + ");";
+                "(1, 'Batman', 'Action', '126 min', 1, 1, '7,6' , '1989', " + "'" + imageInByte1 + "'" + ")," +
+                "(2, 'Batman Begins', 'Action', '140 min', 1, 1, '8,3' , '2005', " + "'" + imageInByte1 + "'" + ")," +
+                "(3, 'The Dark Night', 'Action', '152 min', 1, 1, '9.0' , '2008', " + "'" + imageInByte1 + "'" + ")," +
+                "(4, 'The Dark Night Rises', 'Action', '164 min', 1, 1, '8,5' , '2012', " + "'" + imageInByte1 + "'" + ")," +
+                "(5, 'Zoolander', 'Comedy', '89 min', 1, 1, '6,6' , '2001', " + "'" + imageInByte1 + "'" + ")," +
+                "(6, 'Interstellar', 'Adventure', '169 min', 1, 1, '8,6' , '2014', " + "'" + imageInByte1 + "'" + ")," +
+                "(7, 'Star Wars Das Erwachen der Macht', 'Action', '135 min', 1, 1, '8,5' , '2015', " + "'" + imageInByte1 + "'" + ");";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
         db.execSQL(ROW4);

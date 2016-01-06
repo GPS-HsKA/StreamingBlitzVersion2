@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/search"
+        android:title="@string/prompt_suche_filmserie"
+        android:icon="@drawable/lupe_icon"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
     <item   android:id="@+id/menu_history"
         android:title="History"
         app:showAsAction="never"/>
