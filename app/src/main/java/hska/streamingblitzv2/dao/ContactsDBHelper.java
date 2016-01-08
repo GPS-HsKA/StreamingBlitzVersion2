@@ -13,6 +13,7 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
 import hska.streamingblitzv2.activities.LoginActivity;
@@ -65,8 +66,10 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
 
     private static ContactsDBHelper instance = null;
     private Context ctx;
+    SQLiteDatabase mDb;
+    ContactsDBHelper mDbHelper;
 
-    private ContactsDBHelper(Context context) {
+    public ContactsDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.ctx = context;
     }
@@ -252,8 +255,36 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public ContactsDBHelper open() throws SQLException
+    {
+        mDbHelper = new ContactsDBHelper(ctx);
+        mDb = mDbHelper.getWritableDatabase();
+        return this;
+    }
+
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public long registerUser(String user, String pw)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(UserEntry.COLUMN_NAME_USERNAME, user);
+        initialValues.put(UserEntry.COLUMN_NAME_PASSWORT, pw);
+
+        return mDb.insert(UserEntry.TABLE_NAME, null, initialValues);
+    }
+
+    public boolean loginUser(String username, String password) throws SQLException
+    {
+        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=? AND user_passwort=?", new String[]{username,password});
+        if (mCursor != null) {
+            if(mCursor.getCount() > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

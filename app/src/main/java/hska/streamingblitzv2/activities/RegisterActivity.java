@@ -1,8 +1,10 @@
 package hska.streamingblitzv2.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -12,8 +14,6 @@ import hska.streamingblitzv2.model.User;
 import hska.streamingblitzv2.tasks.InsertUserTask;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    public class CreateUserActivity extends AppCompatActivity {
 
         private User user = new User();
 
@@ -34,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             user.setUsername(getStringValue(R.id.edit_register_username));
             user.setPasswort(getStringValue(R.id.edit_register_password));
-            user.setMail(getStringValue(R.id.edit_register_email));
             user.setEinstellungen(einstellungen);
 
             InsertUserTask insertTask = new InsertUserTask(this);
@@ -49,5 +48,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
             return "";
         }
-    }
+
+        public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_backLogin:
+                showLogin();
+                break;
+
+            default:
+                break;
+        }
+        return false;
+        }
+
+        protected void showLogin()
+        {
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+        }
+
 }

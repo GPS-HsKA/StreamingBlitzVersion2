@@ -37,6 +37,7 @@ public class HilfeActivity extends AppCompatActivity {
                 (android.support.v7.widget.SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
 
         return super.onCreateOptionsMenu(menu);
     }

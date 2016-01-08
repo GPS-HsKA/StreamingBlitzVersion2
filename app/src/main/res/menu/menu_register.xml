@@ -2,17 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item   android:id="@+id/menu_history"
-            android:title="History"
+    <item   android:id="@+id/menu_backLogin"
+            android:title="Login"
             android:showAsAction="ifRoom"/>
-    <item   android:id="@+id/menu_scanner"
-            android:title="Scanner"
-            android:showAsAction="ifRoom"/>
-    <item   android:id="@+id/menu_hilfe"
-            android:title="Hilfe"
-            android:showAsAction="ifRoom"/>
-    <item   android:id="@+id/menu_einstellungen"
-            android:title="Einstellungen"
-            android:showAsAction="ifRoom"/>
-
 </menu>
