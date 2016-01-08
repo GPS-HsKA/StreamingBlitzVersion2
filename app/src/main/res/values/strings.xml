@@ -9,7 +9,7 @@
     <string name="app_einstellungen">Einstellungen</string>
 
     <!-- Strings für den Login -->
-    <string name="prompt_email">Email/Username</string>
+    <string name="prompt_email">Email</string>
     <string name="prompt_password">Passwort</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Login</string>

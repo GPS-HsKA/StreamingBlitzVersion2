@@ -12,7 +12,6 @@ public class UserMapper {
         user.setId(cursor.getLong(cursor.getColumnIndex(UserEntry._ID)));
         user.setUsername(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_USERNAME)));
         user.setPasswort(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_PASSWORT)));
-        user.setMail(cursor.getString(cursor.getColumnIndex(UserEntry.COLUMN_NAME_MAIL)));
         user.setEinstellungen(EinstellungenMapper.map(cursor));
 
         return user;

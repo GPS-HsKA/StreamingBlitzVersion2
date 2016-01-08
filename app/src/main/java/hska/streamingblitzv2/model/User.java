@@ -16,7 +16,6 @@ public class User implements Parcelable {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", passwort='" + passwort + '\'' +
-                ", mail='" + mail + '\'' +
                 ", einstellungen=" + einstellungen +
                 '}';
     }
@@ -24,7 +23,6 @@ public class User implements Parcelable {
     public User(String username, String passwort, String mail, Einstellungen einstellungen) {
         this.username = username;
         this.passwort = passwort;
-        this.mail = mail;
         this.einstellungen = einstellungen;
     }
 
@@ -58,16 +56,6 @@ public class User implements Parcelable {
 
     private String passwort;
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    private String mail;
-
     public Einstellungen getEinstellungen() {
         return einstellungen;
     }
@@ -91,7 +79,6 @@ public class User implements Parcelable {
         dest.writeLong(id);
         dest.writeString(username);
         dest.writeString(passwort);
-        dest.writeString(mail);
         dest.writeParcelable(einstellungen, flags);
     }
 
@@ -111,7 +98,6 @@ public class User implements Parcelable {
         id = in.readLong();
         username = in.readString();
         passwort = in.readString();
-        mail = in.readString();
         einstellungen = in.readParcelable(Einstellungen.class.getClassLoader());
     }
 }

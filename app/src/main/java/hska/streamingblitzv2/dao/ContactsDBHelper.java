@@ -33,7 +33,6 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
                     UserEntry._ID + " INTEGER PRIMARY KEY," +
                     UserEntry.COLUMN_NAME_USERNAME + " TEXT," +
                     UserEntry.COLUMN_NAME_PASSWORT + " TEXT," +
-                    UserEntry.COLUMN_NAME_MAIL + " TEXT," +
                     UserEntry.COLUMN_EINSTELLUNGEN_FK + " INTEGER," +
                     "FOREIGN KEY(" + UserEntry.COLUMN_EINSTELLUNGEN_FK + ") REFERENCES " + EinstellungenEntry.TABLE_NAME + "(" + EinstellungenEntry._ID + ")" +
                     ")";
@@ -96,7 +95,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor findUserByName(String name) {
-        String whereClause = UserEntry.COLUMN_NAME_USERNAME + " LIKE ? OR " + UserEntry.COLUMN_NAME_MAIL + " LIKE ?";
+        String whereClause = UserEntry.COLUMN_NAME_USERNAME + " LIKE ?";
         String[] whereArgs = new String[]{name + "%", name + "%"};
         String sortOrder = UserEntry.COLUMN_NAME_USERNAME + " ASC";
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -202,7 +201,6 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     private ContentValues getUserValues(User user) {
         ContentValues values = new ContentValues();
         values.put(UserEntry.COLUMN_NAME_USERNAME, user.getUsername());
-        values.put(UserEntry.COLUMN_NAME_MAIL, user.getMail());
         values.put(UserEntry.COLUMN_NAME_PASSWORT, user.getPasswort());
 
         return values;
@@ -231,7 +229,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_USER);
         db.execSQL(SQL_CREATE_TABLE_EINSTELLUNGEN);
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
-        String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 'Mail', 1);";
+        String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
         String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_JAHR + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
                 " Values " +
@@ -272,6 +270,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         ContentValues initialValues = new ContentValues();
         initialValues.put(UserEntry.COLUMN_NAME_USERNAME, user);
         initialValues.put(UserEntry.COLUMN_NAME_PASSWORT, pw);
+        initialValues.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, 1);
 
         return mDb.insert(UserEntry.TABLE_NAME, null, initialValues);
     }

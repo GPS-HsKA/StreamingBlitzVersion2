@@ -12,7 +12,6 @@ public final class DatabaseSchema {
         public static final String TABLE_NAME = "user";
         public static final String COLUMN_NAME_USERNAME = "user_username";
         public static final String COLUMN_NAME_PASSWORT = "user_passwort";
-        public static final String COLUMN_NAME_MAIL = "user_mail";
         public static final String COLUMN_EINSTELLUNGEN_FK = "user_einstellungen_fk";
     }
 
