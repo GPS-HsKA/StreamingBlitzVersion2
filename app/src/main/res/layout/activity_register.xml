@@ -22,9 +22,8 @@
         android:ems="10"
         android:id="@+id/edit_register_username"
         android:hint="@string/prompt_register_username"
-        android:layout_marginTop="100px"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/edit_register_password" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -32,10 +31,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/edit_register_password"
-        android:layout_marginTop="17dp"
         android:hint="@string/prompt_register_password"
+        android:layout_below="@+id/edit_register_username"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/edit_register_username" />
+        android:layout_marginTop="31dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,17 +52,8 @@
         android:id="@+id/button_register_anlegen"
         android:hint="@string/action_register_anlegen"
         android:layout_below="@+id/edit_register_password"
-        android:layout_alignStart="@+id/button_register_loeschen"
-        android:layout_marginTop="20px" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_register_loeschen"
-        android:hint="@string/action_register_loeschen"
-        android:layout_below="@+id/button_register_anlegen"
         android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="10px" />
+        android:layout_marginTop="58dp"
+        android:onClick="sendUser" />
 
 </RelativeLayout>

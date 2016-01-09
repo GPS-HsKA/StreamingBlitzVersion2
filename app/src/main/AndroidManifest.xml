@@ -45,6 +45,9 @@
             android:name=".activities.LostPasswordActivity"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".activities.RegisterEinstellungenActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".activities.ScanActivity"
             android:theme="@style/AppTheme" />
         <activity

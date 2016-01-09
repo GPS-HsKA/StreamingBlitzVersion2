@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Netflix"
+        android:id="@+id/checkBox_netflix"
+        android:layout_alignTop="@+id/checkBox_maxdome"
+        android:layout_alignStart="@+id/textView15"
+        android:checked="true"
+        android:clickable="true"
+        android:longClickable="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amazon Prime"
+        android:id="@+id/checkBox_amazon"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/checkBox_netflix"
+        android:layout_alignStart="@+id/checkBox_netflix"
+        android:checked="true"
+        android:longClickable="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maxdome"
+        android:id="@+id/checkBox_maxdome"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/textView15"
+        android:checked="true"
+        android:longClickable="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snap by Sky"
+        android:id="@+id/checkBox_snap"
+        android:layout_alignTop="@+id/checkBox_amazon"
+        android:layout_alignStart="@+id/checkBox_maxdome"
+        android:checked="true"
+        android:longClickable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Einstellungen anpassen für"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/imageView14"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_einstellungen_speichern"
+        android:hint="Speichern"
+        android:layout_marginBottom="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="saveSettings" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView14"
+        android:src="@drawable/banner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/einstellungen_fueruser"
+        android:layout_below="@+id/textView15"
+        android:layout_alignStart="@+id/register_einstellungen_speichern"
+        android:allowUndo="false"
+        android:clickable="false" />
+
+</RelativeLayout>

@@ -52,12 +52,12 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
             "CREATE TABLE " + EinstellungenEntry.TABLE_NAME + " (" +
                     EinstellungenEntry._ID + " INTEGER PRIMARY KEY," +
-                    EinstellungenEntry.COLUMN_NAME_NETFLIX + " INTEGER," +
-                    EinstellungenEntry.COLUMN_NAME_AMAZONPRIME + " INTEGER," +
-                    EinstellungenEntry.COLUMN_NAME_MAXDOME + " INTEGER," +
-                    EinstellungenEntry.COLUMN_NAME_SNAP + " INTEGER," +
-                    EinstellungenEntry.COLUMN_USER_FK + " INTEGER," +
-                    "FOREIGN KEY(" + EinstellungenEntry.COLUMN_USER_FK + ") REFERENCES " + UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")" +
+                    EinstellungenEntry.COLUMN_NAME_NETFLIX + " BOOLEAN," +
+                    EinstellungenEntry.COLUMN_NAME_MAXDOME + " BOOLEAN," +
+                    EinstellungenEntry.COLUMN_NAME_AMAZONPRIME + " BOOLEAN," +
+                    EinstellungenEntry.COLUMN_NAME_SNAP + " BOOLEAN," +
+                    EinstellungenEntry.COLUMN_USER_FK + " TEXT," +
+                    "FOREIGN KEY(" + EinstellungenEntry.COLUMN_USER_FK + ") REFERENCES " + UserEntry.TABLE_NAME + "(" + UserEntry.COLUMN_NAME_USERNAME + ")" +
                     ")";
     private static final String SQL_DROP_TABLE_CONTENT = "DROP TABLE IF EXISTS " + ContentEntry.TABLE_NAME + ";";
     private static final String SQL_DROP_TABLE_USER = "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME + ";";
@@ -133,7 +133,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    private Einstellungen insertEinstellungen(Einstellungen einstellungen) {
+    public Einstellungen insertEinstellungen(Einstellungen einstellungen) {
         ContentValues values = getEinstellungenValues(einstellungen);
 
         long id = getWritableDatabase().insert(EinstellungenEntry.TABLE_NAME, null, values);
@@ -144,22 +144,14 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         return einstellungen;
     }
 
-    public int updateUser(User user) {
-
-        int affected = updateEinstellungen(user.getEinstellungen());
-        if (affected != 1) {
-            return affected;
-        }
-
-        String whereClause = UserEntry._ID + "=?";
-        String[] whereArgs = new String[]{String.valueOf(user.getId())};
-
-        ContentValues values = getUserValues(user);
-        values.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, user.getEinstellungen().getId());
-        Log.d("ContactsDBHelper", "updateUser: " + user.toString());
-
-        return getWritableDatabase().update(UserEntry.TABLE_NAME, values, whereClause, whereArgs);
+    public boolean updateUser(String userName, Long einstellungenId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, einstellungenId);
+        db.update(UserEntry.TABLE_NAME, contentValues, UserEntry.COLUMN_NAME_USERNAME + " = ? ", null);
+        return true;
     }
+
 
     private int updateEinstellungen(Einstellungen einstellungen) {
         String whereClause = EinstellungenEntry._ID + "=?";
@@ -200,6 +192,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
 
     private ContentValues getUserValues(User user) {
         ContentValues values = new ContentValues();
+        values.put(UserEntry._ID, user.getId());
         values.put(UserEntry.COLUMN_NAME_USERNAME, user.getUsername());
         values.put(UserEntry.COLUMN_NAME_PASSWORT, user.getPasswort());
 
@@ -212,6 +205,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         values.put(EinstellungenEntry.COLUMN_NAME_AMAZONPRIME, einstellungen.getAmazonprime());
         values.put(EinstellungenEntry.COLUMN_NAME_MAXDOME, einstellungen.getMaxdome());
         values.put(EinstellungenEntry.COLUMN_NAME_SNAP, einstellungen.getSnap());
+        values.put(EinstellungenEntry.COLUMN_USER_FK, einstellungen.getUser());
         return values;
     }
 
@@ -230,7 +224,7 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_EINSTELLUNGEN);
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
         String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 1);";
-        String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, 1);";
+        String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, '1');";
         String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_JAHR + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
                 " Values " +
                 "(1, 'Batman', 'Action', '126 min', 1, 1, '7,6' , '1989', " + "'" + imageInByte1 + "'" + ")," +

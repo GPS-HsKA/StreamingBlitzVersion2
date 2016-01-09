@@ -10,7 +10,7 @@ public class Einstellungen implements Parcelable {
 
     }
 
-    public Einstellungen(Integer netflix, Integer amazonprime, Integer maxdome, Integer snap, User user) {
+    public Einstellungen(Boolean netflix, Boolean amazonprime, Boolean maxdome, Boolean snap, String user) {
         this.netflix = netflix;
         this.amazonprime = amazonprime;
         this.maxdome = maxdome;
@@ -20,43 +20,43 @@ public class Einstellungen implements Parcelable {
 
     private long id;
 
-    public Integer getNetflix() {
+    public Boolean getNetflix() {
         return netflix;
     }
 
-    public Integer getAmazonprime() {
+    public Boolean getAmazonprime() {
         return amazonprime;
     }
 
-    public Integer getMaxdome() {
+    public Boolean getMaxdome() {
         return maxdome;
     }
 
-    public Integer getSnap() {
+    public Boolean getSnap() {
         return snap;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setNetflix(Integer netflix) {
+    public void setNetflix(Boolean netflix) {
         this.netflix = netflix;
     }
 
-    public void setAmazonprime(Integer amazonprime) {
+    public void setAmazonprime(Boolean amazonprime) {
         this.amazonprime = amazonprime;
     }
 
-    public void setMaxdome(Integer maxdome) {
+    public void setMaxdome(Boolean maxdome) {
         this.maxdome = maxdome;
     }
 
-    public void setSnap(Integer snap) {
+    public void setSnap(Boolean snap) {
         this.snap = snap;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -72,11 +72,11 @@ public class Einstellungen implements Parcelable {
                 '}';
     }
 
-    private Integer netflix;
-    private Integer amazonprime;
-    private Integer maxdome;
-    private Integer snap;
-    private User user;
+    private Boolean netflix;
+    private Boolean amazonprime;
+    private Boolean maxdome;
+    private Boolean snap;
+    private String user;
 
     @Override
     public int describeContents() {
@@ -94,11 +94,11 @@ public class Einstellungen implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
-        dest.writeInt(netflix);
-        dest.writeInt(amazonprime);
-        dest.writeInt(maxdome);
-        dest.writeInt(snap);
-        dest.writeParcelable(user, flags);
+        dest.writeByte((byte) (netflix ? 1 : 0));
+        dest.writeByte((byte) (amazonprime ? 1 : 0));
+        dest.writeByte((byte) (maxdome ? 1 : 0));
+        dest.writeByte((byte) (snap ? 1 : 0));
+        dest.writeString(user);
     }
 
 
@@ -116,11 +116,11 @@ public class Einstellungen implements Parcelable {
 
     private Einstellungen(Parcel in) {
         id = in.readLong();
-        netflix = in.readInt();
-        amazonprime = in.readInt();
-        maxdome = in.readInt();
-        snap = in.readInt();
-        user = in.readParcelable(User.class.getClassLoader());
+        netflix = in.readByte() != 0;
+        amazonprime = in.readByte() != 0;
+        maxdome = in.readByte() != 0;
+        snap = in.readByte() != 0;
+        user = in.readString();
     }
 
 }

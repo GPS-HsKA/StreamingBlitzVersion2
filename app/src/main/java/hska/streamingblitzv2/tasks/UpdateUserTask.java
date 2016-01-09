@@ -1,3 +1,4 @@
+/*
 package hska.streamingblitzv2.tasks;
 
 import android.app.ProgressDialog;
@@ -28,12 +29,14 @@ public class UpdateUserTask extends AsyncTask<User, Void, Integer> {
         dialog = ProgressDialog.show(ctx, "", "Please wait...", true);
     }
 
-    @Override
+    */
+/*@Override
     protected Integer doInBackground(User... params) {
         user = params[0];
 
         return ContactsDBHelper.getInstance(ctx).updateUser(user);
-    }
+    }*//*
+
 
     @Override
     protected void onPostExecute(Integer affectedRows) {
@@ -48,3 +51,4 @@ public class UpdateUserTask extends AsyncTask<User, Void, Integer> {
         }
     }
 }
+*/

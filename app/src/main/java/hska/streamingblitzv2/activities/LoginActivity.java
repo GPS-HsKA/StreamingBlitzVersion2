@@ -79,24 +79,16 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtUserName.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(txtPassword.getWindowToken(), 0);
-                try {
-
-                    String username = txtUserName.getText().toString();
-                    String password = txtPassword.getText().toString();
-                    long i = dbAdapter.registerUser(username, password);
-                    if(i != -1)
-                        Toast.makeText(LoginActivity.this, "User wurde angelegt",Toast.LENGTH_LONG).show();
-
-                }
-                catch (Exception e){
-                    Toast.makeText(LoginActivity.this, "Etwas lief schief!",
-                            Toast.LENGTH_LONG).show();
-                }
+                register();
             }
         });
+
+
+    }
+
+    public void register() {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
     }
 
     public void login() {

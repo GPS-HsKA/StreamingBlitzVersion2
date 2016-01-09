@@ -1,26 +1,50 @@
 package hska.streamingblitzv2.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
+import hska.streamingblitzv2.dao.ContactsDBHelper;
 import hska.streamingblitzv2.model.Einstellungen;
 import hska.streamingblitzv2.model.User;
 import hska.streamingblitzv2.tasks.InsertUserTask;
 
 public class RegisterActivity extends AppCompatActivity {
 
-        private User user = new User();
+    ContactsDBHelper dbAdapter;
+    EditText txtUserName;
+    EditText txtPassword;
+    Button btnRegister;
+
+    private User user = new User();
+    public final static String EXTRA_MESSAGE = "";
 
         @Override
-        protected void onCreate(final Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
+
+            btnRegister = (Button) findViewById(R.id.button_register_anlegen);
+            txtUserName = (EditText) findViewById(R.id.edit_register_username);
+            txtPassword = (EditText) findViewById(R.id.edit_register_password);
+
+            dbAdapter = new ContactsDBHelper(this);
+            try {
+                dbAdapter.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -29,25 +53,40 @@ public class RegisterActivity extends AppCompatActivity {
             return super.onCreateOptionsMenu(menu);
         }
 
-        private void saveUser() {
-            Einstellungen einstellungen = new Einstellungen();
+        public void sendUser(View view){
 
-            user.setUsername(getStringValue(R.id.edit_register_username));
-            user.setPasswort(getStringValue(R.id.edit_register_password));
-            user.setEinstellungen(einstellungen);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtUserName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(txtPassword.getWindowToken(), 0);
+                try {
+                    String username = txtUserName.getText().toString();
+                    String password = txtPassword.getText().toString();
+                    long i = dbAdapter.registerUser(username, password);
+                    if (i != -1){
+                        Toast.makeText(RegisterActivity.this, "User angelegt!",
+                                Toast.LENGTH_LONG).show();
+                    }
 
-            InsertUserTask insertTask = new InsertUserTask(this);
-            insertTask.execute(user);
+                } catch (Exception e) {
+                    Toast.makeText(RegisterActivity.this, "Etwas lief schief!",
+                            Toast.LENGTH_LONG).show();
+                }
+
+            Intent intent = new Intent(this, RegisterEinstellungenActivity.class);
+            EditText editText = (EditText) findViewById(R.id.edit_register_username);
+            String message = editText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivity(intent);
         }
 
-        private String getStringValue(int id) {
+   /*     private String getStringValue(int id) {
             View field = findViewById(id);
             if (field instanceof EditText) {
                 EditText textField = (EditText) field;
                 return textField.getText().toString();
             }
             return "";
-        }
+        }*/
 
         public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
