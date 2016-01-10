@@ -20,7 +20,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.dao.DatabaseSchema;
 import hska.streamingblitzv2.model.Einstellungen;
 import hska.streamingblitzv2.model.User;
@@ -29,7 +29,7 @@ import hska.streamingblitzv2.tasks.InsertUserTask;
 public class RegisterEinstellungenActivity extends AppCompatActivity {
 
     String userString;
-    ContactsDBHelper dbAdapter;
+    DBHelper dbAdapter;
     CheckBox checkBoxNetflix;
     CheckBox checkBoxAmazon;
     CheckBox checkBoxMaxdome;
@@ -45,7 +45,7 @@ public class RegisterEinstellungenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userString = intent.getStringExtra(RegisterActivity.EXTRA_MESSAGE);
 
-        dbAdapter = new ContactsDBHelper(this);
+        dbAdapter = new DBHelper(this);
         try {
             dbAdapter.open();
         } catch (SQLException e) {

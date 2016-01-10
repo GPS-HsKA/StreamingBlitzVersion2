@@ -3,8 +3,6 @@ package hska.streamingblitzv2.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.DatabaseSchema;
 import hska.streamingblitzv2.model.Content;
 
 import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;
@@ -22,7 +19,6 @@ import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;
 public class ContentDetailActivity extends AppCompatActivity {
 
     private Content content;
-    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

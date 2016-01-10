@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -22,7 +20,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.dao.DatabaseSchema.ContentEntry;
 import hska.streamingblitzv2.util.ContentMapper;
 
@@ -67,8 +65,6 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_suchergebnis, menu);
 
-        // Get the SearchView and set the searchable configuration
-        // Associate searchable configuration with the SearchView
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         android.support.v7.widget.SearchView searchView =
@@ -107,7 +103,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
                     @Override
                     public Cursor loadInBackground() {
-                        return ContactsDBHelper.getInstance(ContentListActivity.this).findContentByName(query);
+                        return DBHelper.getInstance(ContentListActivity.this).findContentByName(query);
                     }
                 };
             default:

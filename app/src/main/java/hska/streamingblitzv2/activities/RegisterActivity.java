@@ -15,14 +15,14 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.Einstellungen;
 import hska.streamingblitzv2.model.User;
 import hska.streamingblitzv2.tasks.InsertUserTask;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    ContactsDBHelper dbAdapter;
+    DBHelper dbAdapter;
     EditText txtUserName;
     EditText txtPassword;
     Button btnRegister;
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
             txtUserName = (EditText) findViewById(R.id.edit_register_username);
             txtPassword = (EditText) findViewById(R.id.edit_register_password);
 
-            dbAdapter = new ContactsDBHelper(this);
+            dbAdapter = new DBHelper(this);
             try {
                 dbAdapter.open();
             } catch (SQLException e) {

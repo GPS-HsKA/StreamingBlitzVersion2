@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import hska.streamingblitzv2.activities.RegisterActivity;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.User;
 
 public class DeleteUserTask extends AsyncTask<User, Void, Integer> {
@@ -28,7 +28,7 @@ public class DeleteUserTask extends AsyncTask<User, Void, Integer> {
     @Override
     protected Integer doInBackground(User... params) {
         user = params[0];
-        return ContactsDBHelper.getInstance(ctx).deleteUser(user);
+        return DBHelper.getInstance(ctx).deleteUser(user);
     }
 
     @Override

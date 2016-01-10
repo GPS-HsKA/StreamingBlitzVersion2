@@ -42,7 +42,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Registrierung"
         android:id="@+id/textView"
-        android:layout_below="@+id/imageView2"
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/edit_register_username"
         android:layout_centerHorizontal="true" />
 
     <Button

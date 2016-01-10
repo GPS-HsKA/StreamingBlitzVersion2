@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import hska.streamingblitzv2.activities.RegisterActivity;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.Content;
 
 import android.app.ProgressDialog;
@@ -17,7 +17,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import hska.streamingblitzv2.activities.RegisterActivity;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.Content;
 
 public class DeleteContentTask extends AsyncTask<Content, Void, Integer> {
@@ -38,7 +38,7 @@ public class DeleteContentTask extends AsyncTask<Content, Void, Integer> {
     @Override
     protected Integer doInBackground(Content... params) {
         content = params[0];
-        return ContactsDBHelper.getInstance(ctx).deleteContent(content);
+        return DBHelper.getInstance(ctx).deleteContent(content);
     }
 
     @Override

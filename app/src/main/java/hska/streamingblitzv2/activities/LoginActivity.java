@@ -13,17 +13,17 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 
 
 public class LoginActivity extends AppCompatActivity {
 
-    ContactsDBHelper dbAdapter;
+    DBHelper dbAdapter;
     EditText txtUserName;
     EditText txtPassword;
     Button btnLogin;
     Button btnRegister;
-    Button btnPwVrg;
+    Button btnPwd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.text_login_password);
         btnLogin = (Button) findViewById(R.id.button_login_signin);
         btnRegister = (Button) findViewById(R.id.button_login_registrieren);
-        btnPwVrg = (Button) findViewById(R.id.button_login_pwvrg);
+        btnPwd = (Button) findViewById(R.id.button_login_pwvrg);
 
-        dbAdapter = new ContactsDBHelper(this);
+        dbAdapter = new DBHelper(this);
         try {
             dbAdapter.open();
         } catch (SQLException e) {
@@ -83,6 +83,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnPwd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                pwdVergessen();
+            }
+        });
 
     }
 
@@ -95,5 +102,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, SucheActivity.class);
         startActivity(i);
         }
+
+    public void pwdVergessen() {
+        Intent i = new Intent(this, LostPasswordActivity.class);
+        startActivity(i);
+    }
 }
 

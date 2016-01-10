@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import hska.streamingblitzv2.activities.RegisterActivity;
 import hska.streamingblitzv2.activities.UpdateUserActivity;
-import hska.streamingblitzv2.dao.ContactsDBHelper;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.User;
 
 import static hska.streamingblitzv2.util.Constants.*;
@@ -32,7 +32,7 @@ public class InsertUserTask extends AsyncTask<User, Void, User> {
     protected User doInBackground(User... params) {
         user = params[0];
 
-        return ContactsDBHelper.getInstance(ctx).insertUser(user);
+        return DBHelper.getInstance(ctx).insertUser(user);
     }
 
     @Override

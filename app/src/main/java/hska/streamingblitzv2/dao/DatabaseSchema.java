@@ -41,39 +41,4 @@ public final class DatabaseSchema {
         public static final String COLUMN_NAME_SNAP = "einstellungen_snap";
         public static final String COLUMN_USER_FK = "user_fk";
     }
-
-    public static abstract class StreaminganbieterContentEntry implements BaseColumns {
-        public static final String TABLE_NAME = "streaminganbieter_content";
-        public static final String COLUMN_CONTENT_FK = "content_fk";
-        public static final String COLUMN_STREAMINGANBIETER_FK = "streaminganbieter_fk";
-    }
-
-    public static abstract class WerbeagenturEntry implements BaseColumns {
-        public static final String TABLE_NAME = "werbeagentur";
-        public static final String COLUMN_NAME_NAME = "werbeagentur_name";
-        public static final String COLUMN_NAME_MAILADRESSE = "werbeagentur_mailadresse";
-        public static final String COLUMN_NAME_BACKENDUSER = "werbeagentur_backenduser";
-        public static final String COLUMN_NAME_BACKENDPASSWORT = "werbeagentur_backendpasswort";
-    }
-
-    public static abstract class WerbeagenturWerbungEntry implements BaseColumns {
-        public static final String TABLE_NAME = "werbeagentur_werbung";
-        public static final String COLUMN_WERBEAGENTUR_FK = "werbeagentur_id";
-        public static final String COLUMN_WERBUNG_FK = "werbung_id";
-    }
-
-    public static abstract class WerbungEntry implements BaseColumns {
-        public static final String TABLE_NAME = "werbung";
-        public static final String COLUMN_NAME_LINK = "werbung_link";
-        public static final String COLUMN_NAME_AKTIV = "werbung_aktiv";
-        public static final String COLUMN_WERBEAGENTUR_FK = "werbeagentur_fk";
-    }
-
-    public static abstract class StreaminganbieterEntry implements BaseColumns {
-        public static final String TABLE_NAME = "streaminganbieter";
-        public static final String COLUMN_NAME_LINK = "streaminganbieter_link";
-        public static final String COLUMN_NAME_MAILADRESSE = "streaminganbieter_mailadresse";
-        public static final String COLUMN_NAME_BACKENDUSER = "streaminganbieter_backenduser";
-        public static final String COLUMN_NAME_BACKENDPASSWORT = "streaminganbieter_backendpasswort";
-    }
 }

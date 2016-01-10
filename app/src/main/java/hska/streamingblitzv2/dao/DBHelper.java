@@ -24,7 +24,7 @@ import hska.streamingblitzv2.model.User;
 import hska.streamingblitzv2.model.Content;
 import hska.streamingblitzv2.model.Einstellungen;
 
-public class ContactsDBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "streamingblitzv2.db";
@@ -63,19 +63,19 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
     private static final String SQL_DROP_TABLE_USER = "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME + ";";
     private static final String SQL_DROP_TABLE_EINSTELLUNGEN = "DROP TABLE IF EXISTS " + EinstellungenEntry.TABLE_NAME + ";";
 
-    private static ContactsDBHelper instance = null;
+    private static DBHelper instance = null;
     private Context ctx;
     SQLiteDatabase mDb;
-    ContactsDBHelper mDbHelper;
+    DBHelper mDbHelper;
 
-    public ContactsDBHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.ctx = context;
     }
 
-    public static ContactsDBHelper getInstance(Context ctx) {
+    public static DBHelper getInstance(Context ctx) {
         if (instance == null) {
-            return new ContactsDBHelper(ctx.getApplicationContext());
+            return new DBHelper(ctx.getApplicationContext());
         }
         return instance;
     }
@@ -247,9 +247,9 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public ContactsDBHelper open() throws SQLException
+    public DBHelper open() throws SQLException
     {
-        mDbHelper = new ContactsDBHelper(ctx);
+        mDbHelper = new DBHelper(ctx);
         mDb = mDbHelper.getWritableDatabase();
         return this;
     }
@@ -267,6 +267,18 @@ public class ContactsDBHelper extends SQLiteOpenHelper {
         initialValues.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, 1);
 
         return mDb.insert(UserEntry.TABLE_NAME, null, initialValues);
+    }
+
+    public boolean checkEMail(String email) throws SQLException
+    {
+        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=?", new String[]{email});
+        if (mCursor != null) {
+            if(mCursor.getCount() > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean loginUser(String username, String password) throws SQLException
