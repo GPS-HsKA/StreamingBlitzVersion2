@@ -8,15 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Log;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.activities.LoginActivity;
 import hska.streamingblitzv2.dao.DatabaseSchema.UserEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.ContentEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.EinstellungenEntry;
@@ -209,6 +206,40 @@ public class DBHelper extends SQLiteOpenHelper {
         return values;
     }
 
+    public long registerUser(String user, String pw)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(UserEntry.COLUMN_NAME_USERNAME, user);
+        initialValues.put(UserEntry.COLUMN_NAME_PASSWORT, pw);
+        initialValues.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, 1);
+
+        return mDb.insert(UserEntry.TABLE_NAME, null, initialValues);
+    }
+
+    public boolean checkEMail(String email) throws SQLException
+    {
+        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=?", new String[]{email});
+        if (mCursor != null) {
+            if(mCursor.getCount() > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean loginUser(String username, String password) throws SQLException
+    {
+        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=? AND user_passwort=?", new String[]{username,password});
+        if (mCursor != null) {
+            if(mCursor.getCount() > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -257,39 +288,5 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-    }
-
-    public long registerUser(String user, String pw)
-    {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(UserEntry.COLUMN_NAME_USERNAME, user);
-        initialValues.put(UserEntry.COLUMN_NAME_PASSWORT, pw);
-        initialValues.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, 1);
-
-        return mDb.insert(UserEntry.TABLE_NAME, null, initialValues);
-    }
-
-    public boolean checkEMail(String email) throws SQLException
-    {
-        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=?", new String[]{email});
-        if (mCursor != null) {
-            if(mCursor.getCount() > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean loginUser(String username, String password) throws SQLException
-    {
-        Cursor mCursor = mDb.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME + " WHERE user_username=? AND user_passwort=?", new String[]{username,password});
-        if (mCursor != null) {
-            if(mCursor.getCount() > 0)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }

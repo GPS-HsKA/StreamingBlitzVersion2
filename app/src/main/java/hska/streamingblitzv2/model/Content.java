@@ -101,6 +101,7 @@ public class Content implements Parcelable {
     public void setJahr(String jahr) {
         this.jahr = jahr;
     }
+
     public byte[] getImage() {
         return image;
     }

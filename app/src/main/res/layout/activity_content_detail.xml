@@ -20,34 +20,35 @@
         android:id="@+id/contentdetail_title"
         android:layout_marginTop="10px"
         android:layout_alignParentTop="false"
-        android:layout_toStartOf="@+id/textView6"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10px"
         android:textStyle="bold"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="false" />
 
     <TextView
         android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="jahr"
         android:id="@+id/contentdetail_jahr"
-        android:layout_marginTop="35px"
+        android:layout_marginTop="50px"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_marginLeft="10px"
         android:layout_alignParentEnd="false"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:text="jahr" />
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="270px"
+        android:layout_height="425px"
         android:background="#c1c1c1"
-        android:layout_marginTop="100px">
+        android:layout_marginTop="150px"
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="30px">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,7 +58,9 @@
                 android:id="@+id/textView7"
                 android:textColor="#000000"
                 android:layout_below="@+id/textView6"
-                android:layout_alignStart="@+id/textView6" />
+                android:layout_alignStart="@+id/textView6"
+                android:layout_marginLeft="400px"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +72,7 @@
                 android:layout_alignBaseline="@+id/textView7"
                 android:layout_alignBottom="@+id/textView7"
                 android:layout_toEndOf="@+id/textView7"
-                android:layout_marginStart="15dp" />
+                android:layout_marginLeft="20px" />
         </TableRow>
 
         <TableRow
@@ -82,11 +85,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/prompt_genre"
                 android:id="@+id/textView6"
-                android:layout_marginTop="79dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="132dp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:layout_marginLeft="400px"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,7 +99,8 @@
                 android:id="@+id/contentdetail_genre"
                 android:textColor="#000000"
                 android:layout_above="@+id/contentdetail_laufzeit"
-                android:layout_alignStart="@+id/contentdetail_laufzeit" />
+                android:layout_alignStart="@+id/contentdetail_laufzeit"
+                android:layout_marginLeft="20px" />
         </TableRow>
 
         <TableRow
@@ -104,13 +108,14 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:id="@+id/imageView4"
-                android:layout_marginTop="25dp"
                 android:src="@drawable/imdb_logo"
                 android:layout_below="@+id/textView7"
-                android:layout_alignStart="@+id/textView7" />
+                android:layout_alignStart="@+id/textView7"
+                android:layout_marginLeft="400px"
+                android:layout_marginTop="30px" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,9 +126,9 @@
                 android:text="imdb_score"
                 android:textIsSelectable="false"
                 android:layout_toEndOf="@+id/imageView4"
-                android:layout_marginStart="5dp"
                 android:layout_alignTop="@+id/imageView4"
-                android:layout_marginTop="12dp" />
+                android:layout_marginLeft="10px"
+                android:layout_marginTop="20px" />
         </TableRow>
 
     </TableLayout>
@@ -133,7 +138,8 @@
         android:orientation="vertical"
         android:layout_width="800px"
         android:layout_height="250px"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
         <ImageView
         android:layout_width="800px"
@@ -143,15 +149,16 @@
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal"
         android:visibility="visible"
-            android:baselineAlignBottom="false" />
+            android:baselineAlignBottom="false"
+            android:adjustViewBounds="false" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="400px"
         android:layout_height="200px"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignBottom="@+id/imageView4">
+        android:layout_alignBottom="@+id/tableLayout"
+        android:layout_alignTop="@+id/tableLayout">
 
         <ImageView
             android:layout_width="wrap_content"

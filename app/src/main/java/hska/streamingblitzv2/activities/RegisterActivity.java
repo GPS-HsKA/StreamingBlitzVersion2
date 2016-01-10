@@ -16,9 +16,7 @@ import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
 import hska.streamingblitzv2.dao.DBHelper;
-import hska.streamingblitzv2.model.Einstellungen;
 import hska.streamingblitzv2.model.User;
-import hska.streamingblitzv2.tasks.InsertUserTask;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -78,15 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
         }
-
-   /*     private String getStringValue(int id) {
-            View field = findViewById(id);
-            if (field instanceof EditText) {
-                EditText textField = (EditText) field;
-                return textField.getText().toString();
-            }
-            return "";
-        }*/
 
         public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
