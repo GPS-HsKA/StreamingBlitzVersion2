@@ -14,7 +14,7 @@ public class ContentMapper {
         content.setId(cursor.getLong(cursor.getColumnIndex(ContentEntry._ID)));
         content.setName(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_NAME)));
         content.setGenre(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_GENRE)));
-        content.setImage(cursor.getBlob(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_BILD_PFAD)));
+        content.setImage(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_BILD_PFAD)));
         content.setLaufzeit(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_LAUFZEIT)));
         content.setFilm(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_FILM)));
         content.setSerie(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_SERIE)));

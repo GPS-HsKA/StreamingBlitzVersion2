@@ -12,7 +12,7 @@ public class Content implements Parcelable {
 
     }
 
-    public Content(Long id, String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore, String jahr, byte[] image) {
+    public Content(Long id, String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore, String jahr, String imageUrl) {
         this._id = id;
         this.name = name;
         this.genre = genre;
@@ -21,7 +21,7 @@ public class Content implements Parcelable {
         this.film = film;
         this.imdbScore = imdbScore;
         this.jahr = jahr;
-        this.image = image;
+        this.imageUrl = imageUrl;
     }
 
     private long _id;
@@ -32,7 +32,7 @@ public class Content implements Parcelable {
     private Integer film;
     private String imdbScore;
     private String jahr;
-    private byte[] image;
+    private String imageUrl;
 
     public long getId() {
         return _id;
@@ -90,8 +90,8 @@ public class Content implements Parcelable {
         this.imdbScore = imdbScore;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getJahr() {
@@ -102,15 +102,15 @@ public class Content implements Parcelable {
         this.jahr = jahr;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImage() {
+        return imageUrl;
     }
 
     @Override
     public String toString() {
         return "Content{" +
                 "id=" + _id +
-                "image=" + image +
+                "image=" + imageUrl +
                 ", Name='" + name + '\'' +
                 ", Genre='" + genre + '\'' +
                 ", Laufzeit='" + laufzeit + '\'' +
@@ -128,16 +128,15 @@ public class Content implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(image.length);
         dest.writeLong(_id);
         dest.writeString(name);
         dest.writeString(genre);
-        dest.writeByteArray(image);
         dest.writeString(laufzeit);
         dest.writeString(imdbScore);
         dest.writeInt(serie);
         dest.writeInt(film);
         dest.writeString(jahr);
+        dest.writeString(imageUrl);
     }
 
     public static final Parcelable.Creator<Content> CREATOR
@@ -153,15 +152,14 @@ public class Content implements Parcelable {
     };
 
     private Content(Parcel in) {
-        image = new byte[in.readInt()];
         _id = in.readLong();
         name = in.readString();
         genre = in.readString();
-        in.readByteArray(image);
         laufzeit = in.readString();
         imdbScore = in.readString();
         film = in.readInt();
         serie = in.readInt();
         jahr = in.readString();
+        imageUrl = in.readString();
     }
 }

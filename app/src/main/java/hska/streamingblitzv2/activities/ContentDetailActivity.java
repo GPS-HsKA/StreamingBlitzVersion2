@@ -3,6 +3,9 @@ package hska.streamingblitzv2.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,7 +14,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import hska.streamingblitzv2.R;
+import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.Content;
 
 import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;
@@ -26,7 +33,13 @@ public class ContentDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content_detail);
 
         content = getIntent().getParcelableExtra(PARCEL_CONTENT);
-        initHeaderContent();
+
+        try {
+            initHeaderContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Anzeige einer zufälligen Werbung auf der Seite
         int[] werbungimages = new int[] {R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
@@ -35,12 +48,10 @@ public class ContentDetailActivity extends AppCompatActivity {
         mImageView.setBackgroundResource(werbungimages[imageId]);
     }
 
-    private void initHeaderContent() {
-        int[] images = new int[] {R.drawable.amazon_logo, R.drawable.itunes_logo, R.drawable.netflix_icon};
-        ImageView mImageView = (ImageView)findViewById(R.id.contentdetail_movieimage);
-        int imageId = (int)(Math.random() * images.length);
-        mImageView.setBackgroundResource(images[imageId]);
-        // BitmapFactory.decodeByteArray(content.getImage(), 0, content.getImage().length)
+    private void initHeaderContent() throws IOException {
+        /*ImageView mImageView = (ImageView)findViewById(R.id.contentdetail_movieimage);
+        Bitmap bitmap = android.provider.MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(content.getImage()));
+        mImageView.setImageBitmap(bitmap);*/
         ((TextView) findViewById(R.id.contentdetail_title)).setText(content.getName());
         ((TextView) findViewById(R.id.contentdetail_genre)).setText(content.getGenre());
         ((TextView) findViewById(R.id.contentdetail_laufzeit)).setText(content.getLaufzeit());

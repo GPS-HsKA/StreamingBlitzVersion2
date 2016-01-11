@@ -81,6 +81,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         int[] toViews = {android.R.id.text1, android.R.id.text2};
         adapter = new SimpleCursorAdapter(this, android.R.layout.simple_expandable_list_item_2, null,fromColumns,toViews, 0);
         contentList = (ListView) findViewById(R.id.listView_contentList);
+
         contentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -91,6 +92,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
                 startActivity(detailIntent);
             }
         });
+
         contentList.setAdapter(adapter);
     }
 

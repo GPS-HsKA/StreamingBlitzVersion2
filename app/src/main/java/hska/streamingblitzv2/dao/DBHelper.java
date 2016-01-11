@@ -2,15 +2,22 @@ package hska.streamingblitzv2.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import hska.streamingblitzv2.R;
@@ -23,7 +30,7 @@ import hska.streamingblitzv2.model.Einstellungen;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "streamingblitzv2.db";
     private static final String SQL_CREATE_TABLE_USER =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
@@ -44,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
                     ContentEntry.COLUMN_NAME_IMDBSCORE + " TEXT," +
                     ContentEntry.COLUMN_NAME_JAHR + " TEXT," +
-                    ContentEntry.COLUMN_NAME_BILD_PFAD + " BLOB" + ")";
+                    ContentEntry.COLUMN_NAME_BILD_PFAD + " TEXT" + ")";
 
     private static final String SQL_CREATE_TABLE_EINSTELLUNGEN =
             "CREATE TABLE " + EinstellungenEntry.TABLE_NAME + " (" +
@@ -64,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private Context ctx;
     SQLiteDatabase mDb;
     DBHelper mDbHelper;
+    String batmanPath;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -222,9 +230,11 @@ public class DBHelper extends SQLiteOpenHelper {
         if (mCursor != null) {
             if(mCursor.getCount() > 0)
             {
+                mDb.close();
                 return true;
             }
         }
+        mDb.close();
         return false;
     }
 
@@ -234,40 +244,204 @@ public class DBHelper extends SQLiteOpenHelper {
         if (mCursor != null) {
             if(mCursor.getCount() > 0)
             {
+                mDb.close();
                 return true;
             }
         }
+        mDb.close();
         return false;
+
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        // get image from drawable
-        Bitmap image1 = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.amazon_logo);
-
-        // convert bitmap to byte
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        image1.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] imageInByte1 = stream.toByteArray();
 
         db.execSQL(SQL_CREATE_TABLE_USER);
         db.execSQL(SQL_CREATE_TABLE_EINSTELLUNGEN);
         db.execSQL(SQL_CREATE_TABLE_CONTENT);
         String ROW2 = "INSERT INTO " + UserEntry.TABLE_NAME + " Values (1 , 'goetz@streamingblitz.com', 'password', 1);";
         String ROW3 = "INSERT INTO " + EinstellungenEntry.TABLE_NAME + " Values (1, 1, 1, 1, 1, '1');";
-        String ROW4 = "INSERT INTO " + ContentEntry.TABLE_NAME + " (" + ContentEntry._ID + ", " + ContentEntry.COLUMN_NAME_NAME + ", " + ContentEntry.COLUMN_NAME_GENRE + ", " + ContentEntry.COLUMN_NAME_LAUFZEIT + ", " + ContentEntry.COLUMN_NAME_FILM + ", " + ContentEntry.COLUMN_NAME_SERIE + ", " + ContentEntry.COLUMN_NAME_IMDBSCORE + ", " + ContentEntry.COLUMN_NAME_JAHR + ", " + ContentEntry.COLUMN_NAME_BILD_PFAD + ")" +
-                " Values " +
-                "(1, 'Batman', 'Action', '126 min', 1, 1, '7,6' , '1989', " + "'" + imageInByte1 + "'" + ")," +
-                "(2, 'Batman Begins', 'Action', '140 min', 1, 1, '8,3' , '2005', " + "'" + imageInByte1 + "'" + ")," +
-                "(3, 'The Dark Night', 'Action', '152 min', 1, 1, '9.0' , '2008', " + "'" + imageInByte1 + "'" + ")," +
-                "(4, 'The Dark Night Rises', 'Action', '164 min', 1, 1, '8,5' , '2012', " + "'" + imageInByte1 + "'" + ")," +
-                "(5, 'Zoolander', 'Comedy', '89 min', 1, 1, '6,6' , '2001', " + "'" + imageInByte1 + "'" + ")," +
-                "(6, 'Interstellar', 'Adventure', '169 min', 1, 1, '8,6' , '2014', " + "'" + imageInByte1 + "'" + ")," +
-                "(7, 'Star Wars Das Erwachen der Macht', 'Action', '135 min', 1, 1, '8,5' , '2015', " + "'" + imageInByte1 + "'" + ");";
         db.execSQL(ROW2);
         db.execSQL(ROW3);
-        db.execSQL(ROW4);
+
+        // Contentbilder laden
+        Uri u =  Uri.fromFile(new File("/sdcard/batmanbegins_poster.jpg"));
+        batmanPath = u.toString();
+
+        /* *//*
+        ** Batman ContentValues
+        *//*
+
+        Integer id = 1;
+        String name = "Batman";
+        String genre = "Action";
+        String laufzeit = "126 min";
+        Integer film = 1;
+        Integer serie = 0;
+        String imdb = "7,6";
+        String jahr = "1989";
+        ContentValues batman = new ContentValues();
+        batman.put(ContentEntry._ID, id);
+        batman.put(ContentEntry.COLUMN_NAME_NAME, name);
+        batman.put(ContentEntry.COLUMN_NAME_GENRE, genre);
+        batman.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit);
+        batman.put(ContentEntry.COLUMN_NAME_FILM, film);
+        batman.put(ContentEntry.COLUMN_NAME_SERIE, serie);
+        batman.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb);
+        batman.put(ContentEntry.COLUMN_NAME_JAHR, jahr);
+        batman.put(ContentEntry.COLUMN_NAME_BILD_PFAD, batmanByte);
+        db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, batman, SQLiteDatabase.CONFLICT_REPLACE);
+
+
+        *//*
+        ** Batman Begins ContentValues
+        *//*
+
+        Integer id1 = 2;
+        String name1 = "Batman Begins";
+        String genre1 = "Action";
+        String laufzeit1 = "140 min";
+        Integer film1 = 1;
+        Integer serie1 = 0;
+        String imdb1 = "8,3";
+        String jahr1 = "2005";
+        ContentValues batmanBegins = new ContentValues();
+        batmanBegins.put(ContentEntry._ID, id1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_NAME, name1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_GENRE, genre1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_FILM, film1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_SERIE, serie1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_JAHR, jahr1);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_BILD_PFAD, batmanbeginsByte);
+        db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, batmanBegins, SQLiteDatabase.CONFLICT_REPLACE);
+
+        *//*
+        ** The Dark Knight ContentValues
+        *//*
+
+        Integer id2 = 3;
+        String name2 = "The Dark Knight";
+        String genre2 = "Action";
+        String laufzeit2 = "152 min";
+        Integer film2 = 1;
+        Integer serie2 = 0;
+        String imdb2 = "9,0";
+        String jahr2 = "2008";
+        ContentValues darkKnight = new ContentValues();
+        darkKnight.put(ContentEntry._ID, id2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_NAME, name2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_GENRE, genre2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_FILM, film2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_SERIE, serie2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_JAHR, jahr2);
+        darkKnight.put(ContentEntry.COLUMN_NAME_BILD_PFAD, darkknightByte);
+        db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, darkKnight, SQLiteDatabase.CONFLICT_REPLACE);
+        */
+
+        /*
+        ** The Dark Knight Rises ContentValues
+        */
+
+        Integer id3 = 1;
+        String name3 = "The Dark Knight Rises";
+        String genre3 = "Action";
+        String laufzeit3 = "164 min";
+        Integer film3 = 1;
+        Integer serie3 = 0;
+        String imdb3 = "8,5";
+        String jahr3 = "2012";
+        String image3 = batmanPath;
+        ContentValues darkKnightRises = new ContentValues();
+        darkKnightRises.put(ContentEntry._ID, id3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_NAME, name3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_GENRE, genre3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_FILM, film3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_SERIE, serie3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_JAHR, jahr3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_BILD_PFAD, image3);
+        db.insert(ContentEntry.TABLE_NAME, null, darkKnightRises);
+
+        /*
+        ** Zoolander ContentValues
+        */
+
+        Integer id4 = 2;
+        String name4 = "Zoolander";
+        String genre4 = "Comedy";
+        String laufzeit4 = "89 min";
+        Integer film4 = 1;
+        Integer serie4 = 0;
+        String imdb4 = "6,6";
+        String jahr4 = "2014";
+        ContentValues zoolander = new ContentValues();
+        zoolander.put(ContentEntry._ID, id4);
+        zoolander.put(ContentEntry.COLUMN_NAME_NAME, name4);
+        zoolander.put(ContentEntry.COLUMN_NAME_GENRE, genre4);
+        zoolander.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit4);
+        zoolander.put(ContentEntry.COLUMN_NAME_FILM, film4);
+        zoolander.put(ContentEntry.COLUMN_NAME_SERIE, serie4);
+        zoolander.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb4);
+        zoolander.put(ContentEntry.COLUMN_NAME_JAHR, jahr4);
+        zoolander.put(ContentEntry.COLUMN_NAME_BILD_PFAD, image3);
+        db.insert(ContentEntry.TABLE_NAME, null, zoolander);
+
+
+       /* *//*
+        ** Star Wars ContentValues
+        *//*
+
+        Integer id5 = 6;
+        String name5 = "Star Wars Das Erwachen der Macht";
+        String genre5 = "Action";
+        String laufzeit5 = "135 min";
+        Integer film5 = 1;
+        Integer serie5 = 0;
+        String imdb5 = "8,5";
+        String jahr5 = "2015";
+        ContentValues starWars = new ContentValues();
+        starWars.put(ContentEntry._ID, id5);
+        starWars.put(ContentEntry.COLUMN_NAME_NAME, name5);
+        starWars.put(ContentEntry.COLUMN_NAME_GENRE, genre5);
+        starWars.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit5);
+        starWars.put(ContentEntry.COLUMN_NAME_FILM, film5);
+        starWars.put(ContentEntry.COLUMN_NAME_SERIE, serie5);
+        starWars.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb5);
+        starWars.put(ContentEntry.COLUMN_NAME_JAHR, jahr5);
+        starWars.put(ContentEntry.COLUMN_NAME_BILD_PFAD, starwarsByte);
+        db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, starWars, SQLiteDatabase.CONFLICT_REPLACE);
+
+        *//*
+        ** Interstellar ContentValues
+        *//*
+
+        Integer id6 = 7;
+        String name6 = "Interstellar";
+        String genre6 = "Adventure";
+        String laufzeit6 = "169 min";
+        Integer film6 = 1;
+        Integer serie6 = 0;
+        String imdb6 = "8,6";
+        String jahr6 = "2014";
+        ContentValues interstellar = new ContentValues();
+        interstellar.put(ContentEntry._ID, id6);
+        interstellar.put(ContentEntry.COLUMN_NAME_NAME, name6);
+        interstellar.put(ContentEntry.COLUMN_NAME_GENRE, genre6);
+        interstellar.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit6);
+        interstellar.put(ContentEntry.COLUMN_NAME_FILM, film6);
+        interstellar.put(ContentEntry.COLUMN_NAME_SERIE, serie6);
+        interstellar.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb6);
+        interstellar.put(ContentEntry.COLUMN_NAME_JAHR, jahr6);
+        interstellar.put(ContentEntry.COLUMN_NAME_BILD_PFAD, interstellarByte);
+        db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, interstellar, SQLiteDatabase.CONFLICT_REPLACE);
+
+*/
     }
 
     @Override
