@@ -4,8 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import hska.streamingblitzv2.R;
@@ -26,6 +24,8 @@ import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;
 public class ContentDetailActivity extends AppCompatActivity {
 
     private Content content;
+    ImageView moviePosterContainer;
+    Bitmap moviePoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class ContentDetailActivity extends AppCompatActivity {
 
         try {
             initHeaderContent();
+            getMovieposter();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,10 +49,13 @@ public class ContentDetailActivity extends AppCompatActivity {
         mImageView.setBackgroundResource(werbungimages[imageId]);
     }
 
+    public void getMovieposter(){
+        moviePoster = BitmapFactory.decodeFile(content.getImage());
+        moviePosterContainer = (ImageView) findViewById(R.id.contentdetail_movieimage);
+        moviePosterContainer.setImageBitmap(moviePoster);
+    }
+
     private void initHeaderContent() throws IOException {
-        /*ImageView mImageView = (ImageView)findViewById(R.id.contentdetail_movieimage);
-        Bitmap bitmap = android.provider.MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(content.getImage()));
-        mImageView.setImageBitmap(bitmap);*/
         ((TextView) findViewById(R.id.contentdetail_title)).setText(content.getName());
         ((TextView) findViewById(R.id.contentdetail_genre)).setText(content.getGenre());
         ((TextView) findViewById(R.id.contentdetail_laufzeit)).setText(content.getLaufzeit());

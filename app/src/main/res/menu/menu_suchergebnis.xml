@@ -7,6 +7,9 @@
             android:icon="@drawable/lupe_icon"
             app:showAsAction="always"
             app:actionViewClass="android.support.v7.widget.SearchView"/>
+    <item   android:id="@+id/menu_datenbank"
+            android:title="Datenbank"/>
+            app:showAsAction="never"/>
     <item   android:id="@+id/menu_history"
             android:title="History"
             app:showAsAction="never"/>

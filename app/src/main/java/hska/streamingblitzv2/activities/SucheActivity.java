@@ -52,6 +52,9 @@ public class SucheActivity extends AppCompatActivity {
             case R.id.menu_history:
                 showHistory();
                 break;
+            case R.id.menu_datenbank:
+                showDatenbank();
+                break;
             case R.id.menu_scanner:
                 showScanner();
                 break;
@@ -66,6 +69,12 @@ public class SucheActivity extends AppCompatActivity {
                 break;
         }
         return false;
+    }
+
+    protected void showDatenbank()
+    {
+        Intent i = new Intent(this, DatenbankActivity.class);
+        startActivity(i);
     }
 
     protected void showHistory()

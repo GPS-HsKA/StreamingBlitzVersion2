@@ -1,4 +1,4 @@
 /**
  * Contains the Activities
  */
-package de.hska.mycontacts.activities;
+package hska.streamingblitzv2.activities;

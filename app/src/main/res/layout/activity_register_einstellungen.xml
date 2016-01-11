@@ -79,7 +79,6 @@
         android:id="@+id/einstellungen_fueruser"
         android:layout_below="@+id/textView15"
         android:layout_alignStart="@+id/register_einstellungen_speichern"
-        android:allowUndo="false"
         android:clickable="false" />
 
 </RelativeLayout>

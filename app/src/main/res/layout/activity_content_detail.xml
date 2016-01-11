@@ -166,7 +166,8 @@
             android:id="@+id/contentdetail_movieimage"
             android:layout_toStartOf="@+id/contentdetail_title"
             android:contentDescription="MovieImage"
-            android:layout_marginLeft="10px" />
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="30px" />
 
     </LinearLayout>
 

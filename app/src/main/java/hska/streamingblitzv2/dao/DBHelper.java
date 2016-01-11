@@ -2,35 +2,26 @@ package hska.streamingblitzv2.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.database.sqlite.SQLiteStatement;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
 
-import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.DatabaseSchema.UserEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.ContentEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.EinstellungenEntry;
-import hska.streamingblitzv2.model.User;
+import hska.streamingblitzv2.dao.DatabaseSchema.UserEntry;
 import hska.streamingblitzv2.model.Content;
 import hska.streamingblitzv2.model.Einstellungen;
+import hska.streamingblitzv2.model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "streamingblitzv2.db";
     private static final String SQL_CREATE_TABLE_USER =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
@@ -68,10 +59,18 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_DROP_TABLE_EINSTELLUNGEN = "DROP TABLE IF EXISTS " + EinstellungenEntry.TABLE_NAME + ";";
 
     private static DBHelper instance = null;
+    private static final String TAG = "!## LOG-MESSAGE ##!";
     private Context ctx;
     SQLiteDatabase mDb;
     DBHelper mDbHelper;
-    String batmanPath;
+    String imgZoolanderPath;
+    String imgBatmanPath;
+    String imgBatmanBeginsPath;
+    String imgInterstellarPath;
+    String imgDarkKnightPath;
+    String imgDarkKnightRisesPath;
+    String imgStarWarsPath;
+
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -250,7 +249,31 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         mDb.close();
         return false;
+    }
 
+
+    public void bilderLaden() {
+
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            Log.d(TAG, "SD-Karte gefunden!" + "");
+        }
+        else Log.d(TAG, "SD-Karte NICHT gefunden!" + "");
+
+        File   imgZoolander = new  File(Environment.getExternalStorageDirectory()+"/zoolander.jpg");
+        imgZoolanderPath = imgZoolander.getAbsolutePath();
+        File   imgBatman = new  File(Environment.getExternalStorageDirectory()+"/batman.jpg");
+        imgBatmanPath = imgBatman.getAbsolutePath();
+        File   imgBatmanBegins = new  File(Environment.getExternalStorageDirectory()+"/batmanbegins.jpg");
+        imgBatmanBeginsPath = imgBatmanBegins.getAbsolutePath();
+        File   imgStarWars = new  File(Environment.getExternalStorageDirectory()+"/starwars.jpg");
+        imgStarWarsPath = imgStarWars.getAbsolutePath();
+        File   imgDarkKnight = new  File(Environment.getExternalStorageDirectory()+"/darkknight.jpg");
+        imgDarkKnightPath = imgDarkKnight.getAbsolutePath();
+        File   imgDarkKnightRises = new  File(Environment.getExternalStorageDirectory()+"/darkknightrises.jpg");
+        imgDarkKnightRisesPath = imgDarkKnightRises.getAbsolutePath();
+        File   imgInsterstellar = new  File(Environment.getExternalStorageDirectory()+"/interstellar.jpg");
+        imgInterstellarPath = imgInsterstellar.getAbsolutePath();
     }
 
 
@@ -265,13 +288,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(ROW2);
         db.execSQL(ROW3);
 
-        // Contentbilder laden
-        Uri u =  Uri.fromFile(new File("/sdcard/batmanbegins_poster.jpg"));
-        batmanPath = u.toString();
+        bilderLaden();
 
-        /* *//*
+        /*
         ** Batman ContentValues
-        *//*
+        */
 
         Integer id = 1;
         String name = "Batman";
@@ -290,13 +311,12 @@ public class DBHelper extends SQLiteOpenHelper {
         batman.put(ContentEntry.COLUMN_NAME_SERIE, serie);
         batman.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb);
         batman.put(ContentEntry.COLUMN_NAME_JAHR, jahr);
-        batman.put(ContentEntry.COLUMN_NAME_BILD_PFAD, batmanByte);
+        batman.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgBatmanPath);
         db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, batman, SQLiteDatabase.CONFLICT_REPLACE);
 
-
-        *//*
+        /*
         ** Batman Begins ContentValues
-        *//*
+        */
 
         Integer id1 = 2;
         String name1 = "Batman Begins";
@@ -315,12 +335,12 @@ public class DBHelper extends SQLiteOpenHelper {
         batmanBegins.put(ContentEntry.COLUMN_NAME_SERIE, serie1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_JAHR, jahr1);
-        batmanBegins.put(ContentEntry.COLUMN_NAME_BILD_PFAD, batmanbeginsByte);
+        batmanBegins.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgBatmanBeginsPath);
         db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, batmanBegins, SQLiteDatabase.CONFLICT_REPLACE);
 
-        *//*
+        /*
         ** The Dark Knight ContentValues
-        *//*
+        */
 
         Integer id2 = 3;
         String name2 = "The Dark Knight";
@@ -339,15 +359,14 @@ public class DBHelper extends SQLiteOpenHelper {
         darkKnight.put(ContentEntry.COLUMN_NAME_SERIE, serie2);
         darkKnight.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb2);
         darkKnight.put(ContentEntry.COLUMN_NAME_JAHR, jahr2);
-        darkKnight.put(ContentEntry.COLUMN_NAME_BILD_PFAD, darkknightByte);
+        darkKnight.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgDarkKnightPath);
         db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, darkKnight, SQLiteDatabase.CONFLICT_REPLACE);
-        */
 
         /*
         ** The Dark Knight Rises ContentValues
         */
 
-        Integer id3 = 1;
+        Integer id3 = 4;
         String name3 = "The Dark Knight Rises";
         String genre3 = "Action";
         String laufzeit3 = "164 min";
@@ -355,7 +374,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Integer serie3 = 0;
         String imdb3 = "8,5";
         String jahr3 = "2012";
-        String image3 = batmanPath;
         ContentValues darkKnightRises = new ContentValues();
         darkKnightRises.put(ContentEntry._ID, id3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_NAME, name3);
@@ -365,14 +383,14 @@ public class DBHelper extends SQLiteOpenHelper {
         darkKnightRises.put(ContentEntry.COLUMN_NAME_SERIE, serie3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_JAHR, jahr3);
-        darkKnightRises.put(ContentEntry.COLUMN_NAME_BILD_PFAD, image3);
+        darkKnightRises.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgDarkKnightRisesPath);
         db.insert(ContentEntry.TABLE_NAME, null, darkKnightRises);
 
         /*
         ** Zoolander ContentValues
         */
 
-        Integer id4 = 2;
+        Integer id4 = 5;
         String name4 = "Zoolander";
         String genre4 = "Comedy";
         String laufzeit4 = "89 min";
@@ -389,13 +407,13 @@ public class DBHelper extends SQLiteOpenHelper {
         zoolander.put(ContentEntry.COLUMN_NAME_SERIE, serie4);
         zoolander.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb4);
         zoolander.put(ContentEntry.COLUMN_NAME_JAHR, jahr4);
-        zoolander.put(ContentEntry.COLUMN_NAME_BILD_PFAD, image3);
+        zoolander.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgZoolanderPath);
         db.insert(ContentEntry.TABLE_NAME, null, zoolander);
 
 
-       /* *//*
+        /*
         ** Star Wars ContentValues
-        *//*
+        */
 
         Integer id5 = 6;
         String name5 = "Star Wars Das Erwachen der Macht";
@@ -414,12 +432,12 @@ public class DBHelper extends SQLiteOpenHelper {
         starWars.put(ContentEntry.COLUMN_NAME_SERIE, serie5);
         starWars.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb5);
         starWars.put(ContentEntry.COLUMN_NAME_JAHR, jahr5);
-        starWars.put(ContentEntry.COLUMN_NAME_BILD_PFAD, starwarsByte);
+        starWars.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgStarWarsPath);
         db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, starWars, SQLiteDatabase.CONFLICT_REPLACE);
 
-        *//*
+        /*
         ** Interstellar ContentValues
-        *//*
+        */
 
         Integer id6 = 7;
         String name6 = "Interstellar";
@@ -438,10 +456,9 @@ public class DBHelper extends SQLiteOpenHelper {
         interstellar.put(ContentEntry.COLUMN_NAME_SERIE, serie6);
         interstellar.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb6);
         interstellar.put(ContentEntry.COLUMN_NAME_JAHR, jahr6);
-        interstellar.put(ContentEntry.COLUMN_NAME_BILD_PFAD, interstellarByte);
+        interstellar.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgInterstellarPath);
         db.insertWithOnConflict(ContentEntry.TABLE_NAME, null, interstellar, SQLiteDatabase.CONFLICT_REPLACE);
 
-*/
     }
 
     @Override
