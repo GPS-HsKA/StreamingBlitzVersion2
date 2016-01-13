@@ -56,13 +56,11 @@
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical">
 
-                <TextView android:id="@+id/text_einstellungen1"
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="100px"
-                    android:text="+"
-                    android:layout_marginLeft="200px" />
+                    android:id="@+id/checkBox_einstellungen_netflix"
+                    android:layout_marginLeft="300px" />
             </LinearLayout>
 
         </TableRow>
@@ -95,13 +93,11 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical" >
 
-                <TextView android:id="@+id/text_einstellungen2"
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="100px"
-                    android:text="+"
-                    android:layout_marginLeft="200px" />
+                    android:id="@+id/checkBox_einstellungen_amazon"
+                    android:layout_marginLeft="300px" />
             </LinearLayout>
 
         </TableRow>
@@ -134,13 +130,11 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical" >
 
-                <TextView android:id="@+id/text_einstellungen3"
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="100px"
-                    android:text="+"
-                    android:layout_marginLeft="200px" />
+                    android:id="@+id/checkBox_einstellungen_maxdome"
+                    android:layout_marginLeft="300px" />
             </LinearLayout>
 
         </TableRow>
@@ -173,16 +167,51 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical" >
 
-                <TextView android:id="@+id/text_einstellungen4"
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="100px"
-                    android:text="+"
-                    android:layout_marginLeft="200px" />
+                    android:id="@+id/checkBox_einstellungen_snap"
+                    android:layout_marginLeft="300px" />
             </LinearLayout>
 
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="username"
+            android:id="@+id/txt_einstellungen_username"
+            android:layout_column="1"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:textAlignment="center" />
 
     </TableLayout>
 

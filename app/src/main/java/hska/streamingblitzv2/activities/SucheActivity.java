@@ -3,6 +3,7 @@ package hska.streamingblitzv2.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,13 +16,19 @@ import hska.streamingblitzv2.R;
 public class SucheActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "";
-
+    String userString;
+    String TAG = "User: ";
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suche);
 
+        Intent intent = getIntent();
+        userString = intent.getStringExtra(RegisterActivity.EXTRA_MESSAGE);
+
+        Log.d(TAG, "-" + userString);
 
         Button suchergebnis_blitzscan = (Button) findViewById(R.id.button_suche_blitzscan);
         suchergebnis_blitzscan.setOnClickListener(new View.OnClickListener() {
@@ -33,11 +40,14 @@ public class SucheActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
-        Intent intent = new Intent(this, ContentListActivity.class);
+        Intent intent1 = new Intent(this, ContentListActivity.class);
+        extras = new Bundle();
         EditText editText = (EditText) findViewById(R.id.editText_suche);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        String searchString = editText.getText().toString();
+        extras.putString("EXTRA_SEARCH", searchString);
+        extras.putString("EXTRA_USER", userString);
+        intent1.putExtras(extras);
+        startActivity(intent1);
     }
 
     @Override
@@ -97,8 +107,10 @@ public class SucheActivity extends AppCompatActivity {
 
     protected void showEinstellungen()
     {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
+        Intent intentEinstellungen = new Intent(this, EinstellungenActivity.class);
+        extras = new Bundle();
+        extras.putString("EXTRA_USER", userString);
+        intentEinstellungen.putExtras(extras);
+        startActivity(intentEinstellungen);
     }
 }

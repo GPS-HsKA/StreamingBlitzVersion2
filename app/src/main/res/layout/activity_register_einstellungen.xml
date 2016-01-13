@@ -77,8 +77,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/einstellungen_fueruser"
+        android:clickable="false"
         android:layout_below="@+id/textView15"
-        android:layout_alignStart="@+id/register_einstellungen_speichern"
-        android:clickable="false" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000" />
 
 </RelativeLayout>

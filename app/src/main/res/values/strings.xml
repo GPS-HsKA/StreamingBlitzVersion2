@@ -49,5 +49,6 @@
 
     <!--Strings für Suche-->
     <string name="prompt_hint">Suche von Content</string>
+    <string name="title_activity_login2">Sign in</string>
 
 </resources>

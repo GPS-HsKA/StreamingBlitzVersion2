@@ -34,6 +34,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     private android.support.v7.widget.SearchView searchField;
     private int backButtonCount = 0;
     private String query;
+    private String userString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,15 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         setContentView(R.layout.activity_suchergebnis);
 
         Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             query = intent.getStringExtra(SearchManager.QUERY);
         }
         else {
-            query = intent.getStringExtra(SucheActivity.EXTRA_MESSAGE);
+            query = extras.getString("EXTRA_SEARCH");
         }
+
+        userString = extras.getString("EXTRA_USER");
 
         initAdapter();
 
@@ -89,6 +93,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
                 SQLiteCursor cursor = (SQLiteCursor) parent.getItemAtPosition(position);
                 Intent detailIntent = new Intent(ContentListActivity.this, ContentDetailActivity.class);
                 detailIntent.putExtra(PARCEL_CONTENT, ContentMapper.map(cursor));
+                detailIntent.putExtra("EXTRA_USER", userString);
                 startActivity(detailIntent);
             }
         });
@@ -178,8 +183,8 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
     protected void showEinstellungen()
     {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
+        Intent einstellungenIntent = new Intent(ContentListActivity.this, EinstellungenActivity.class);
+        einstellungenIntent.putExtra("EXTRA_USER", userString);
+        startActivity(einstellungenIntent);
     }
 }

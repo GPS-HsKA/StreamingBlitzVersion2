@@ -59,6 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     String username = txtUserName.getText().toString();
                     String password = txtPassword.getText().toString();
+                    if (!isPasswordValid(password)) {
+                        Toast.makeText(RegisterActivity.this,
+                                "Passwort benötigt Sonderzeichen oder ist zu kurz!",
+                                Toast.LENGTH_LONG).show();
+                    }
                     long i = dbAdapter.registerUser(username, password);
                     if (i != -1){
                         Toast.makeText(RegisterActivity.this, "User angelegt!",
@@ -94,6 +99,10 @@ public class RegisterActivity extends AppCompatActivity {
         {
             Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
+        }
+
+        private boolean isPasswordValid(String password) {
+            return password.length() > 6 && password.matches("[A-Za-z0-9 ]*");
         }
 
 }

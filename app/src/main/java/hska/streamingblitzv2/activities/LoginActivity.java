@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
     Button btnPwd;
+    String TAG = "!LOGGING!";
+    String EXTRA_MESSAGE = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,11 @@ public class LoginActivity extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
                 if (username.length() > 0 && password.length() > 0) {
                     try {
-
+                        if (!isEmailValid(username)){
+                        Toast.makeText(LoginActivity.this,
+                                "Bitte eine E-Mail Adresse angeben!",
+                                Toast.LENGTH_LONG).show();
+                        }
                         if (dbAdapter.loginUser(username, password)) {
                             login();
                         } else {
@@ -68,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Etwas lief schief!",
                                 Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "Login FEHLER!" + e);
 
                     }
                 } else {
@@ -95,14 +103,21 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private boolean isEmailValid(String email) {
+        return email.contains("@");
+    }
+
     public void register() {
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
 
     public void login() {
-        Intent i = new Intent(this, SucheActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(this, SucheActivity.class);
+        EditText editText = (EditText) findViewById(R.id.text_login_email);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
         }
 
     public void pwdVergessen() {

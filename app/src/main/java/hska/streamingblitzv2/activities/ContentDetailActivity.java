@@ -26,6 +26,7 @@ public class ContentDetailActivity extends AppCompatActivity {
     private Content content;
     ImageView moviePosterContainer;
     Bitmap moviePoster;
+    String userString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ContentDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content_detail);
 
         content = getIntent().getParcelableExtra(PARCEL_CONTENT);
+        userString = getIntent().getStringExtra("EXTRA_USER");
 
         try {
             initHeaderContent();
@@ -121,8 +123,8 @@ public class ContentDetailActivity extends AppCompatActivity {
 
     protected void showEinstellungen()
     {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
+        Intent einstellungenIntent = new Intent(ContentDetailActivity.this, EinstellungenActivity.class);
+        einstellungenIntent.putExtra("EXTRA_USER", userString);
+        startActivity(einstellungenIntent);
     }
 }

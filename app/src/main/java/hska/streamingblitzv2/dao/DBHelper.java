@@ -21,7 +21,7 @@ import hska.streamingblitzv2.model.User;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "streamingblitzv2.db";
     private static final String SQL_CREATE_TABLE_USER =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
@@ -247,9 +247,32 @@ public class DBHelper extends SQLiteOpenHelper {
                 return true;
             }
         }
-        mDb.close();
         return false;
     }
+
+    public Einstellungen loadSettings(String userString) {
+        mDb = getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + EinstellungenEntry.TABLE_NAME + " WHERE "
+                + EinstellungenEntry.COLUMN_USER_FK + " = " + userString;
+
+        Log.d(TAG, selectQuery);
+
+        Cursor c = mDb.rawQuery(selectQuery, null);
+
+        if (c != null)
+            c.moveToFirst();
+
+        Einstellungen einstellungen = new Einstellungen();
+        einstellungen.setNetflix(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_NETFLIX))));
+        einstellungen.setAmazonprime(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_AMAZONPRIME))));
+        einstellungen.setMaxdome(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_MAXDOME))));
+        einstellungen.setSnap(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_SNAP))));
+
+        return einstellungen;
+    }
+
+
 
 
     public void bilderLaden() {
