@@ -250,30 +250,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public Einstellungen loadSettings(String userString) {
-        mDb = getReadableDatabase();
-
-        String selectQuery = "SELECT  * FROM " + EinstellungenEntry.TABLE_NAME + " WHERE "
-                + EinstellungenEntry.COLUMN_USER_FK + " = " + userString;
-
-        Log.d(TAG, selectQuery);
-
-        Cursor c = mDb.rawQuery(selectQuery, null);
-
-        if (c != null)
-            c.moveToFirst();
-
-        Einstellungen einstellungen = new Einstellungen();
-        einstellungen.setNetflix(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_NETFLIX))));
-        einstellungen.setAmazonprime(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_AMAZONPRIME))));
-        einstellungen.setMaxdome(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_MAXDOME))));
-        einstellungen.setSnap(Boolean.valueOf(c.getString(c.getColumnIndex(EinstellungenEntry.COLUMN_NAME_SNAP))));
-
-        return einstellungen;
-    }
-
-
-
 
     public void bilderLaden() {
 

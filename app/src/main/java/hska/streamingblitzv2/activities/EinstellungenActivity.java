@@ -32,10 +32,7 @@ public class EinstellungenActivity extends AppCompatActivity {
     CheckBox checkBoxEinstellungenAmazon;
     CheckBox checkBoxEinstellungenMaxdome;
     CheckBox checkBoxEinstellungenSnap;
-    Integer netflix;
-    Integer amazon;
-    Integer maxdome;
-    Integer snap;
+    String EXTRA_MESSAGE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,36 +58,28 @@ public class EinstellungenActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        DBHelper.loadSettings(userString);
-
-
-            checkBoxEinstellungenNetflix.setChecked((netflix == 0? false:true));
-            checkBoxEinstellungenAmazon.setChecked((amazon == 0? false:true));
-            checkBoxEinstellungenMaxdome.setChecked((maxdome == 0 ? false : true));
-            checkBoxEinstellungenSnap.setChecked((snap == 0 ? false : true));
     }
 
     public void saveSettings(View view){
-        /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(checkBoxNetflix.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(checkBoxAmazon.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(checkBoxMaxdome.getWindowToken(), 0);
-        imm.hideSoftInputFromWindow(checkBoxSnap.getWindowToken(), 0);
-        Einstellungen einstellungen = new Einstellungen(checkBoxNetflix.isChecked(), checkBoxAmazon.isChecked(), checkBoxMaxdome.isChecked(), checkBoxSnap.isChecked(), userString);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(checkBoxEinstellungenNetflix.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(checkBoxEinstellungenAmazon.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(checkBoxEinstellungenMaxdome.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(checkBoxEinstellungenSnap.getWindowToken(), 0);
+        Einstellungen einstellungen = new Einstellungen(checkBoxEinstellungenNetflix.isChecked(), checkBoxEinstellungenAmazon.isChecked(), checkBoxEinstellungenMaxdome.isChecked(), checkBoxEinstellungenSnap.isChecked(), userString);
         try {
             Einstellungen i = dbAdapter.insertEinstellungen(einstellungen);
             if (i == einstellungen)
-                Toast.makeText(RegisterEinstellungenActivity.this, "Einstellung wurde angelegt", Toast.LENGTH_LONG).show();
+                Toast.makeText(EinstellungenActivity.this, "Einstellung wurden aktualisiert!", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
-            Toast.makeText(RegisterEinstellungenActivity.this, "Etwas lief schief!",
+            Toast.makeText(EinstellungenActivity.this, "Etwas lief schief!",
                     Toast.LENGTH_LONG).show();
         }
         Intent intent = new Intent(this, SucheActivity.class);
         String message = userString;
         intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override
