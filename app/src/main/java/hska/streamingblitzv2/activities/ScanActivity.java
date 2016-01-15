@@ -10,6 +10,10 @@ import hska.streamingblitzv2.R;
 
 public class ScanActivity extends AppCompatActivity {
 
+    /*
+    Musste nicht implementiert werden
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import hska.streamingblitzv2.R;
-import hska.streamingblitzv2.dao.DBHelper;
 import hska.streamingblitzv2.model.Content;
 
 import static hska.streamingblitzv2.util.Constants.PARCEL_CONTENT;

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.SQLException;
 
@@ -25,7 +24,7 @@ import hska.streamingblitzv2.model.Einstellungen;
 public class EinstellungenActivity extends AppCompatActivity {
 
     String userString;
-    String TAG = "LOGGING-Einstellungen";
+    String TAG = "LOGGING-Einstellungen ------";
     SQLiteDatabase mDb;
     DBHelper dbAdapter;
     CheckBox checkBoxEinstellungenNetflix;
@@ -33,11 +32,16 @@ public class EinstellungenActivity extends AppCompatActivity {
     CheckBox checkBoxEinstellungenMaxdome;
     CheckBox checkBoxEinstellungenSnap;
     String EXTRA_MESSAGE = "";
+    Cursor einstellungen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_einstellungen);
+
+        /*
+        Username wird abgerufen
+         */
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -58,7 +62,32 @@ public class EinstellungenActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        /*
+        Einstellungen des Users werden auf die Checkboxen geladen
+         */
+
+        try {
+            einstellungen = dbAdapter.loadEinstellungen(userString);
+            while(einstellungen.moveToNext()){
+                checkBoxEinstellungenNetflix.setChecked(einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_AMAZONPRIME)) != 1);
+                Log.d(TAG, "" + einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_AMAZONPRIME)));
+                checkBoxEinstellungenAmazon.setChecked(einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_AMAZONPRIME)) != 1);
+                Log.d(TAG, "" + einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_NETFLIX)));
+                checkBoxEinstellungenMaxdome.setChecked(einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_MAXDOME)) != 1);
+                Log.d(TAG, "" + einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_MAXDOME)));
+                checkBoxEinstellungenSnap.setChecked(einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_SNAP)) != 1);
+                Log.d(TAG, "" + einstellungen.getInt(einstellungen.getColumnIndex(DatabaseSchema.EinstellungenEntry.COLUMN_NAME_SNAP)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    /*
+    Über den Button "speichern" kann der Anwender seine Einstellungen anpassen
+     */
+
 
     public void saveSettings(View view){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -67,15 +96,9 @@ public class EinstellungenActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(checkBoxEinstellungenMaxdome.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(checkBoxEinstellungenSnap.getWindowToken(), 0);
         Einstellungen einstellungen = new Einstellungen(checkBoxEinstellungenNetflix.isChecked(), checkBoxEinstellungenAmazon.isChecked(), checkBoxEinstellungenMaxdome.isChecked(), checkBoxEinstellungenSnap.isChecked(), userString);
-        try {
-            Einstellungen i = dbAdapter.insertEinstellungen(einstellungen);
-            if (i == einstellungen)
-                Toast.makeText(EinstellungenActivity.this, "Einstellung wurden aktualisiert!", Toast.LENGTH_LONG).show();
 
-        } catch (Exception e) {
-            Toast.makeText(EinstellungenActivity.this, "Etwas lief schief!",
-                    Toast.LENGTH_LONG).show();
-        }
+        dbAdapter.updateEinstellungen(einstellungen);
+
         Intent intent = new Intent(this, SucheActivity.class);
         String message = userString;
         intent.putExtra(EXTRA_MESSAGE, message);
@@ -100,9 +123,6 @@ public class EinstellungenActivity extends AppCompatActivity {
             case R.id.menu_hilfe:
                 showHilfe();
                 break;
-            case R.id.menu_einstellungen:
-                showEinstellungen();
-                break;
 
             default:
                 break;
@@ -126,12 +146,5 @@ public class EinstellungenActivity extends AppCompatActivity {
     {
         Intent i = new Intent(this, HilfeActivity.class);
         startActivity(i);
-    }
-
-    protected void showEinstellungen()
-    {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
     }
 }

@@ -2,7 +2,6 @@ package hska.streamingblitzv2.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
@@ -47,6 +45,10 @@ public class LoginActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        /*
+        Login mit Überprüfung von Username und Passwort, sowie vorhandenem @-Zeichen
+         */
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -111,6 +113,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
+
+    /*
+    Übergabe des Usernames auf die nächste Activity
+     */
 
     public void login() {
         Intent intent = new Intent(this, SucheActivity.class);

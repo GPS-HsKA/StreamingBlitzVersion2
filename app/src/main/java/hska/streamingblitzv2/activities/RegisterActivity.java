@@ -51,6 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
             return super.onCreateOptionsMenu(menu);
         }
 
+    /*
+    Vor dem Anlegen des Users wird geprüft, ob das Passwort den Voraussetzungen enstpricht
+     */
+
         public void sendUser(View view){
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

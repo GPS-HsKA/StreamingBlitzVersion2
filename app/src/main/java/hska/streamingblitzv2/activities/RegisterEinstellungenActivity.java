@@ -58,6 +58,10 @@ public class RegisterEinstellungenActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
+    Neue Einstellungen für einen User weden angelegt
+     */
+
     public void saveSettings(View view){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(checkBoxNetflix.getWindowToken(), 0);

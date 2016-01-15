@@ -18,7 +18,10 @@ public class HilfeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hilfe);
 
-        // Anzeige einer zufälligen Werbung auf der Seite
+       /*
+        Anzeige eines Werbebanners (Random)
+         */
+
         int[] werbungimages = new int[] {R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
         ImageView mImageView = (ImageView)findViewById(R.id.hilfe_werbung);
         int imageId = (int)(Math.random() * werbungimages.length);

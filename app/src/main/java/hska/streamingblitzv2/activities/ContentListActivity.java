@@ -41,6 +41,10 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suchergebnis);
 
+        /*
+        Kommt Suchanfrage über Intent vom Suchfeld oder von der Searchbar?
+         */
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -56,11 +60,14 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
         getLoaderManager().initLoader(SQLITE_LOADER, null, this);
 
-            // Anzeige einer zufälligen Werbung auf der Seite
-            int[] werbungimages = new int[]{R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
-            ImageView mImageView = (ImageView) findViewById(R.id.werbungimageview);
-            int imageId = (int) (Math.random() * werbungimages.length);
-            mImageView.setBackgroundResource(werbungimages[imageId]);
+        /*
+        Anzeige eines Werbebanners (Random)
+         */
+
+        int[] werbungimages = new int[]{R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
+        ImageView mImageView = (ImageView) findViewById(R.id.werbungimageview);
+        int imageId = (int) (Math.random() * werbungimages.length);
+        mImageView.setBackgroundResource(werbungimages[imageId]);
         }
 
 
@@ -81,10 +88,19 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void initAdapter() {
+
+        /*
+        Befüllen der ListView mit Objekten aus der Datenbank
+         */
+
         String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME, ContentEntry.COLUMN_NAME_JAHR};
         int[] toViews = {android.R.id.text1, android.R.id.text2};
         adapter = new SimpleCursorAdapter(this, android.R.layout.simple_expandable_list_item_2, null,fromColumns,toViews, 0);
         contentList = (ListView) findViewById(R.id.listView_contentList);
+
+        /*
+        Funktion die ausgeführt wird, wenn auf ein Objekt geklickt wird
+         */
 
         contentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -100,6 +116,10 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
         contentList.setAdapter(adapter);
     }
+
+    /*
+    Im Hintergrund wird die Fuktion "findContentByName" geladen
+     */
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderID, Bundle args) {
@@ -132,6 +152,10 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         startActivity(new Intent(ContentListActivity.this, ScanActivity.class));
     }
 
+    /*
+    Menü-Optionen
+     */
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
@@ -156,6 +180,10 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
         }
         return false;
     }
+
+    /*
+    Menü Funktionen
+     */
 
     protected void showDatenbank()
     {

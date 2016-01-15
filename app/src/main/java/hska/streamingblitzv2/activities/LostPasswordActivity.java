@@ -36,6 +36,10 @@ public class LostPasswordActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        /*
+        Button prüft, ob ein Userkonto vorhanden ist und gibt eine entsprechende Nachricht aus
+         */
+
         btnSenden.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -13,6 +13,10 @@ import hska.streamingblitzv2.R;
 
 public class HistoryActivity extends AppCompatActivity {
 
+    /*
+    Konnte noch nicht implementiert werden
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import hska.streamingblitzv2.dao.DatabaseSchema.ContentEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.EinstellungenEntry;
 import hska.streamingblitzv2.dao.DatabaseSchema.UserEntry;
-import hska.streamingblitzv2.model.Content;
 import hska.streamingblitzv2.model.Einstellungen;
 import hska.streamingblitzv2.model.User;
 
@@ -84,27 +83,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return instance;
     }
 
-    public Cursor findAllUser() {
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sortOrder = UserEntry.COLUMN_NAME_USERNAME + " ASC";
-        qb.setTables(UserEntry.TABLE_NAME + " JOIN " + EinstellungenEntry.TABLE_NAME + " ON " + UserEntry.TABLE_NAME + "." + UserEntry.COLUMN_EINSTELLUNGEN_FK + "=" + EinstellungenEntry.TABLE_NAME + "." + EinstellungenEntry._ID);
-        return qb.query(getReadableDatabase(), null, null, null, null, null, sortOrder);
-    }
-
     public Cursor findAllContent() {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String sortOrder = ContentEntry.COLUMN_NAME_NAME + " ASC";
         qb.setTables(ContentEntry.TABLE_NAME);
         return qb.query(getReadableDatabase(), null, null, null, null, null, sortOrder);
-    }
-
-    public Cursor findUserByName(String name) {
-        String whereClause = UserEntry.COLUMN_NAME_USERNAME + " LIKE ?";
-        String[] whereArgs = new String[]{name + "%", name + "%"};
-        String sortOrder = UserEntry.COLUMN_NAME_USERNAME + " ASC";
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(UserEntry.TABLE_NAME + " JOIN " + EinstellungenEntry.TABLE_NAME + " ON " + UserEntry.TABLE_NAME + "." + UserEntry.COLUMN_EINSTELLUNGEN_FK + "=" + EinstellungenEntry.TABLE_NAME + "." + EinstellungenEntry._ID);
-        return qb.query(getReadableDatabase(),null,whereClause, whereArgs, null, null, sortOrder);
     }
 
     public Cursor findContentByName(String name) {
@@ -114,27 +97,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         qb.setTables(ContentEntry.TABLE_NAME);
         return qb.query(getReadableDatabase(),null,whereClause, whereArgs, null, null, sortOrder);
-    }
-
-    public User insertUser(User user) {
-
-        Einstellungen einstellungen = insertEinstellungen(user.getEinstellungen());
-        if (einstellungen == null) {
-            return null;
-        }
-
-        user.setEinstellungen(einstellungen);
-
-        ContentValues values = getUserValues(user);
-        values.put(UserEntry.COLUMN_EINSTELLUNGEN_FK, user.getEinstellungen().getId());
-
-        long userId = getWritableDatabase().insert(UserEntry.TABLE_NAME, null, values);
-        if (userId == -1) {
-            return null;
-        }
-
-        user.setId(userId);
-        return user;
     }
 
     public Einstellungen insertEinstellungen(Einstellungen einstellungen) {
@@ -156,42 +118,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-
-    private int updateEinstellungen(Einstellungen einstellungen) {
-        String whereClause = EinstellungenEntry._ID + "=?";
-        String[] whereArgs = new String[]{String.valueOf(einstellungen.getId())};
-
+    public int updateEinstellungen(Einstellungen einstellungen) {
         ContentValues values = getEinstellungenValues(einstellungen);
-        Log.d("ContactsDBHelper", "updateEinstellungen: " + einstellungen.toString());
+        Log.d("DBHelper", "updateEinstellungen: " + einstellungen.toString());
+        values.put(EinstellungenEntry.COLUMN_NAME_NETFLIX, einstellungen.getNetflix());
+        values.put(EinstellungenEntry.COLUMN_NAME_AMAZONPRIME, einstellungen.getAmazonprime());
+        values.put(EinstellungenEntry.COLUMN_NAME_MAXDOME, einstellungen.getMaxdome());
+        values.put(EinstellungenEntry.COLUMN_NAME_SNAP, einstellungen.getSnap());
 
-        return getWritableDatabase().update(EinstellungenEntry.TABLE_NAME, values, whereClause, whereArgs);
-    }
-
-    public int deleteUser(User user) {
-        String whereClause = UserEntry._ID + "=?";
-        String[] whereArgs = new String[]{String.valueOf(user.getId())};
-
-        int affected = deleteEinstellungen(user.getEinstellungen());
-        if (affected != 1) {
-            return affected;
-        }
-
-        return getWritableDatabase().delete(UserEntry.TABLE_NAME, whereClause, whereArgs);
-    }
-
-    public int deleteContent(Content content) {
-        String whereClause = ContentEntry._ID + "=?";
-        String[] whereArgs = new String[]{String.valueOf(content.getId())};
-
-
-        return getWritableDatabase().delete(ContentEntry.TABLE_NAME, whereClause, whereArgs);
-    }
-
-    private int deleteEinstellungen(Einstellungen einstellungen) {
-        String whereClause = EinstellungenEntry._ID + "=?";
-        String[] whereArgs = new String[]{String.valueOf(einstellungen.getId())};
-
-        return getWritableDatabase().delete(EinstellungenEntry.TABLE_NAME, whereClause, whereArgs);
+        return getWritableDatabase().update(EinstellungenEntry.TABLE_NAME, values, EinstellungenEntry.COLUMN_USER_FK + " = ?",
+                new String[]{String.valueOf(einstellungen.getUser())});
     }
 
     private ContentValues getUserValues(User user) {
@@ -202,6 +138,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return values;
     }
+
+    /*
+    Speichern der Checkboxen zu den Einstellungen innerhalb der Userregistrierung
+     */
 
     private ContentValues getEinstellungenValues(Einstellungen einstellungen) {
         ContentValues values = new ContentValues();
@@ -250,6 +190,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public Cursor loadEinstellungen(String user) throws SQLException{
+        String whereClause = EinstellungenEntry.COLUMN_USER_FK + " LIKE ?";
+        String[] whereArgs = new String[]{user};
+        String sortOrder = EinstellungenEntry.COLUMN_USER_FK + " ASC";
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables(EinstellungenEntry.TABLE_NAME);
+        return qb.query(getReadableDatabase(),null,whereClause, whereArgs, null, null, sortOrder);
+    }
 
     public void bilderLaden() {
 

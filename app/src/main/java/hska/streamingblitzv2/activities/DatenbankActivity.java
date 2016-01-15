@@ -44,6 +44,10 @@ public class DatenbankActivity extends AppCompatActivity implements LoaderManage
         return true;
     }
 
+    /*
+    Alle Daten welche im Moment in der Datenbank liegen werden geladen und angezeigt
+     */
+
     private void initAdapter() {
         String[] fromColumns = {ContentEntry.COLUMN_NAME_NAME, ContentEntry.COLUMN_NAME_JAHR};
         int[] toViews = {android.R.id.text1, android.R.id.text2};
