@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="History"
+        android:id="@+id/textView_history_banner"
+        android:singleLine="false"
+        android:layout_marginTop="10px"
+        android:layout_alignParentTop="true"
+        android:background="#c1c1c1"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:autoText="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_history_blitzscan"
+        android:hint="@string/action_suchergebnis_blitzscan"
+        android:drawableLeft="@drawable/blitz_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:onClick="switchToScan" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="700px"
+        android:id="@+id/listView_history_content"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="50px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Werbung"
+        android:id="@+id/textView_history_werbung"
+        android:layout_alignParentStart="true"
+        android:textSize="10dp"
+        android:layout_marginTop="425dp" />
+
+    <ImageView
+        android:layout_width="800px"
+        android:layout_height="250px"
+        android:id="@+id/imageView_history_werbung"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

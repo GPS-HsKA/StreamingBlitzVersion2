@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 
 import hska.streamingblitzv2.R;
@@ -21,6 +22,11 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        int[] werbungimages = new int[]{R.drawable.avengers_banner, R.drawable.expendables_banner, R.drawable.antman_banner};
+        ImageView mImageView = (ImageView) findViewById(R.id.imageView_history_werbung);
+        int imageId = (int) (Math.random() * werbungimages.length);
+        mImageView.setBackgroundResource(werbungimages[imageId]);
     }
 
     @Override
