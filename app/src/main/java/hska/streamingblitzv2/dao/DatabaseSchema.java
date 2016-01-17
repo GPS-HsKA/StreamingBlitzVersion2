@@ -20,8 +20,10 @@ public final class DatabaseSchema {
         public static final String COLUMN_NAME_NAME = "content_name";
         public static final String COLUMN_NAME_GENRE = "content_genre";
         public static final String COLUMN_NAME_LAUFZEIT = "content_laufzeit";
-        public static final String COLUMN_NAME_SERIE = "content_serie";
-        public static final String COLUMN_NAME_FILM = "content_film";
+        public static final String COLUMN_NAME_NETFLIX = "content_netflix";
+        public static final String COLUMN_NAME_AMAZON = "content_amazon";
+        public static final String COLUMN_NAME_MAXDOME = "content_maxdome";
+        public static final String COLUMN_NAME_SNAP = "content_snap";
         public static final String COLUMN_NAME_IMDBSCORE = "content_imdbscore";
         public static final String COLUMN_NAME_JAHR = "content_jahr";
         public static final String COLUMN_NAME_BILD_PFAD = "content_bild";

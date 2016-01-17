@@ -37,8 +37,10 @@ public class DBHelper extends SQLiteOpenHelper {
                     ContentEntry.COLUMN_NAME_NAME + " TEXT," +
                     ContentEntry.COLUMN_NAME_GENRE + " TEXT," +
                     ContentEntry.COLUMN_NAME_LAUFZEIT + " TEXT," +
-                    ContentEntry.COLUMN_NAME_SERIE + " INTEGER," +
-                    ContentEntry.COLUMN_NAME_FILM + " INTEGER," +
+                    ContentEntry.COLUMN_NAME_NETFLIX + " INTEGER," +
+                    ContentEntry.COLUMN_NAME_AMAZON + " INTEGER," +
+                    ContentEntry.COLUMN_NAME_MAXDOME + " INTEGER," +
+                    ContentEntry.COLUMN_NAME_SNAP + " INTEGER," +
                     ContentEntry.COLUMN_NAME_IMDBSCORE + " TEXT," +
                     ContentEntry.COLUMN_NAME_JAHR + " TEXT," +
                     ContentEntry.COLUMN_NAME_BILD_PFAD + " TEXT" + ")";
@@ -245,8 +247,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name = "Batman";
         String genre = "Action";
         String laufzeit = "126 min";
-        Integer film = 1;
-        Integer serie = 0;
+        Integer netflix = 1;
+        Integer amazon = 0;
+        Integer maxdome = 0;
+        Integer snap = 1;
         String imdb = "7,6";
         String jahr = "1989";
         ContentValues batman = new ContentValues();
@@ -254,8 +258,10 @@ public class DBHelper extends SQLiteOpenHelper {
         batman.put(ContentEntry.COLUMN_NAME_NAME, name);
         batman.put(ContentEntry.COLUMN_NAME_GENRE, genre);
         batman.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit);
-        batman.put(ContentEntry.COLUMN_NAME_FILM, film);
-        batman.put(ContentEntry.COLUMN_NAME_SERIE, serie);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap);
         batman.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb);
         batman.put(ContentEntry.COLUMN_NAME_JAHR, jahr);
         batman.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgBatmanPath);
@@ -269,8 +275,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name1 = "Batman Begins";
         String genre1 = "Action";
         String laufzeit1 = "140 min";
-        Integer film1 = 1;
-        Integer serie1 = 0;
+        Integer netflix1 = 1;
+        Integer amazon1 = 1;
+        Integer maxdome1 = 0;
+        Integer snap1 = 1;
         String imdb1 = "8,3";
         String jahr1 = "2005";
         ContentValues batmanBegins = new ContentValues();
@@ -278,8 +286,10 @@ public class DBHelper extends SQLiteOpenHelper {
         batmanBegins.put(ContentEntry.COLUMN_NAME_NAME, name1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_GENRE, genre1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit1);
-        batmanBegins.put(ContentEntry.COLUMN_NAME_FILM, film1);
-        batmanBegins.put(ContentEntry.COLUMN_NAME_SERIE, serie1);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix1);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon1);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome1);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_JAHR, jahr1);
         batmanBegins.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgBatmanBeginsPath);
@@ -293,8 +303,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name2 = "The Dark Knight";
         String genre2 = "Action";
         String laufzeit2 = "152 min";
-        Integer film2 = 1;
-        Integer serie2 = 0;
+        Integer netflix2 = 1;
+        Integer amazon2 = 1;
+        Integer maxdome2 = 1;
+        Integer snap2 = 1;
         String imdb2 = "9,0";
         String jahr2 = "2008";
         ContentValues darkKnight = new ContentValues();
@@ -302,8 +314,10 @@ public class DBHelper extends SQLiteOpenHelper {
         darkKnight.put(ContentEntry.COLUMN_NAME_NAME, name2);
         darkKnight.put(ContentEntry.COLUMN_NAME_GENRE, genre2);
         darkKnight.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit2);
-        darkKnight.put(ContentEntry.COLUMN_NAME_FILM, film2);
-        darkKnight.put(ContentEntry.COLUMN_NAME_SERIE, serie2);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix2);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon2);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome2);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap2);
         darkKnight.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb2);
         darkKnight.put(ContentEntry.COLUMN_NAME_JAHR, jahr2);
         darkKnight.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgDarkKnightPath);
@@ -317,8 +331,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name3 = "The Dark Knight Rises";
         String genre3 = "Action";
         String laufzeit3 = "164 min";
-        Integer film3 = 1;
-        Integer serie3 = 0;
+        Integer netflix3 = 0;
+        Integer amazon3 = 1;
+        Integer maxdome3 = 0;
+        Integer snap3 = 1;
         String imdb3 = "8,5";
         String jahr3 = "2012";
         ContentValues darkKnightRises = new ContentValues();
@@ -326,8 +342,10 @@ public class DBHelper extends SQLiteOpenHelper {
         darkKnightRises.put(ContentEntry.COLUMN_NAME_NAME, name3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_GENRE, genre3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit3);
-        darkKnightRises.put(ContentEntry.COLUMN_NAME_FILM, film3);
-        darkKnightRises.put(ContentEntry.COLUMN_NAME_SERIE, serie3);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix3);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon3);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome3);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_JAHR, jahr3);
         darkKnightRises.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgDarkKnightRisesPath);
@@ -341,8 +359,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name4 = "Zoolander";
         String genre4 = "Comedy";
         String laufzeit4 = "89 min";
-        Integer film4 = 1;
-        Integer serie4 = 0;
+        Integer netflix4 = 1;
+        Integer amazon4 = 0;
+        Integer maxdome4 = 0;
+        Integer snap4 = 0;
         String imdb4 = "6,6";
         String jahr4 = "2014";
         ContentValues zoolander = new ContentValues();
@@ -350,8 +370,10 @@ public class DBHelper extends SQLiteOpenHelper {
         zoolander.put(ContentEntry.COLUMN_NAME_NAME, name4);
         zoolander.put(ContentEntry.COLUMN_NAME_GENRE, genre4);
         zoolander.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit4);
-        zoolander.put(ContentEntry.COLUMN_NAME_FILM, film4);
-        zoolander.put(ContentEntry.COLUMN_NAME_SERIE, serie4);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix4);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon4);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome4);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap4);
         zoolander.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb4);
         zoolander.put(ContentEntry.COLUMN_NAME_JAHR, jahr4);
         zoolander.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgZoolanderPath);
@@ -366,8 +388,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name5 = "Star Wars Das Erwachen der Macht";
         String genre5 = "Action";
         String laufzeit5 = "135 min";
-        Integer film5 = 1;
-        Integer serie5 = 0;
+        Integer netflix5 = 0;
+        Integer amazon5 = 0;
+        Integer maxdome5 = 0;
+        Integer snap5 = 0;
         String imdb5 = "8,5";
         String jahr5 = "2015";
         ContentValues starWars = new ContentValues();
@@ -375,8 +399,10 @@ public class DBHelper extends SQLiteOpenHelper {
         starWars.put(ContentEntry.COLUMN_NAME_NAME, name5);
         starWars.put(ContentEntry.COLUMN_NAME_GENRE, genre5);
         starWars.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit5);
-        starWars.put(ContentEntry.COLUMN_NAME_FILM, film5);
-        starWars.put(ContentEntry.COLUMN_NAME_SERIE, serie5);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix5);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon5);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome5);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap5);
         starWars.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb5);
         starWars.put(ContentEntry.COLUMN_NAME_JAHR, jahr5);
         starWars.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgStarWarsPath);
@@ -390,8 +416,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String name6 = "Interstellar";
         String genre6 = "Adventure";
         String laufzeit6 = "169 min";
-        Integer film6 = 1;
-        Integer serie6 = 0;
+        Integer netflix6 = 1;
+        Integer amazon6 = 1;
+        Integer maxdome6 = 0;
+        Integer snap6 = 1;
         String imdb6 = "8,6";
         String jahr6 = "2014";
         ContentValues interstellar = new ContentValues();
@@ -399,8 +427,10 @@ public class DBHelper extends SQLiteOpenHelper {
         interstellar.put(ContentEntry.COLUMN_NAME_NAME, name6);
         interstellar.put(ContentEntry.COLUMN_NAME_GENRE, genre6);
         interstellar.put(ContentEntry.COLUMN_NAME_LAUFZEIT, laufzeit6);
-        interstellar.put(ContentEntry.COLUMN_NAME_FILM, film6);
-        interstellar.put(ContentEntry.COLUMN_NAME_SERIE, serie6);
+        batman.put(ContentEntry.COLUMN_NAME_NETFLIX, netflix6);
+        batman.put(ContentEntry.COLUMN_NAME_AMAZON, amazon6);
+        batman.put(ContentEntry.COLUMN_NAME_MAXDOME, maxdome6);
+        batman.put(ContentEntry.COLUMN_NAME_SNAP, snap6);
         interstellar.put(ContentEntry.COLUMN_NAME_IMDBSCORE, imdb6);
         interstellar.put(ContentEntry.COLUMN_NAME_JAHR, jahr6);
         interstellar.put(ContentEntry.COLUMN_NAME_BILD_PFAD, imgInterstellarPath);

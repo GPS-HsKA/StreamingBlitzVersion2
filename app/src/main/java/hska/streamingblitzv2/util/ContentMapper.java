@@ -16,8 +16,10 @@ public class ContentMapper {
         content.setGenre(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_GENRE)));
         content.setImage(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_BILD_PFAD)));
         content.setLaufzeit(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_LAUFZEIT)));
-        content.setFilm(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_FILM)));
-        content.setSerie(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_SERIE)));
+        content.setNetflix(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_NETFLIX)));
+        content.setAmazon(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_AMAZON)));
+        content.setMaxdome(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_MAXDOME)));
+        content.setSnap(cursor.getInt(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_SNAP)));
         content.setImdbScore(cursor.getString(cursor.getColumnIndex(ContentEntry.COLUMN_NAME_IMDBSCORE)));
 
         return content;

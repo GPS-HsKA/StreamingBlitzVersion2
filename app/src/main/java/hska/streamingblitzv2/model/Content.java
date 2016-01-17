@@ -12,13 +12,15 @@ public class Content implements Parcelable {
 
     }
 
-    public Content(Long id, String name, String genre, String laufzeit, Integer serie, Integer film, String imdbScore, String jahr, String imageUrl) {
+    public Content(Long id, String name, String genre, String laufzeit, Integer netflix, Integer amazon, Integer maxdome, Integer snap, String imdbScore, String jahr, String imageUrl) {
         this._id = id;
         this.name = name;
         this.genre = genre;
         this.laufzeit = laufzeit;
-        this.serie = serie;
-        this.film = film;
+        this.netflix = netflix;
+        this.amazon = amazon;
+        this.maxdome = maxdome;
+        this.snap = snap;
         this.imdbScore = imdbScore;
         this.jahr = jahr;
         this.imageUrl = imageUrl;
@@ -28,8 +30,10 @@ public class Content implements Parcelable {
     private String name;
     private String genre;
     private String laufzeit;
-    private Integer serie;
-    private Integer film;
+    private Integer netflix;
+    private Integer amazon;
+    private Integer maxdome;
+    private Integer snap;
     private String imdbScore;
     private String jahr;
     private String imageUrl;
@@ -66,22 +70,37 @@ public class Content implements Parcelable {
         this.laufzeit = laufzeit;
     }
 
-    public Integer getSerie() {
-        return serie;
+    public void setNetflix(Integer netflix) {
+        this.netflix = netflix;
     }
 
-    public void setSerie(Integer serie) {
-        this.serie = serie;
+    public void setAmazon(Integer amazon) {
+        this.amazon = amazon;
     }
 
-    public Integer getFilm() {
-        return film;
+    public void setMaxdome(Integer maxdome) {
+        this.maxdome = maxdome;
     }
 
-    public void setFilm(Integer film) {
-        this.film = film;
+    public void setSnap(Integer snap) {
+        this.snap = snap;
     }
 
+    public Integer getNetflix() {
+        return netflix;
+    }
+
+    public Integer getAmazon() {
+        return amazon;
+    }
+
+    public Integer getMaxdome() {
+        return maxdome;
+    }
+
+    public Integer getSnap() {
+        return snap;
+    }
     public String getImdbScore() {
         return imdbScore;
     }
@@ -114,8 +133,10 @@ public class Content implements Parcelable {
                 ", Name='" + name + '\'' +
                 ", Genre='" + genre + '\'' +
                 ", Laufzeit='" + laufzeit + '\'' +
-                ", Serie='" + serie + '\'' +
-                ", Film=" + film + '\'' +
+                ", Netflix='" + netflix + '\'' +
+                ", Amazon=" + amazon + '\'' +
+                ", Maxdome=" + maxdome + '\'' +
+                ", Snap=" + snap + '\'' +
                 ", ImdbScore=" + imdbScore +
                 ", Jahr=" + jahr +
                 '}';
@@ -133,8 +154,10 @@ public class Content implements Parcelable {
         dest.writeString(genre);
         dest.writeString(laufzeit);
         dest.writeString(imdbScore);
-        dest.writeInt(serie);
-        dest.writeInt(film);
+        dest.writeInt(netflix);
+        dest.writeInt(amazon);
+        dest.writeInt(maxdome);
+        dest.writeInt(snap);
         dest.writeString(jahr);
         dest.writeString(imageUrl);
     }
@@ -157,8 +180,10 @@ public class Content implements Parcelable {
         genre = in.readString();
         laufzeit = in.readString();
         imdbScore = in.readString();
-        film = in.readInt();
-        serie = in.readInt();
+        netflix = in.readInt();
+        amazon = in.readInt();
+        maxdome = in.readInt();
+        snap = in.readInt();
         jahr = in.readString();
         imageUrl = in.readString();
     }
