@@ -30,10 +30,11 @@
 
         <TableRow android:layout_marginTop="50px">
             <ImageView android:id="@+id/imageView_netflix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200px"
+                android:layout_height="200px"
                 android:paddingLeft="2dip"
-                android:paddingRight="5dip" android:src="@drawable/netflix_icon"/>
+                android:paddingRight="5dip" android:src="@drawable/netflix_icon"
+                android:layout_marginLeft="20px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,10 +68,11 @@
 
         <TableRow android:layout_marginTop="20px">
             <ImageView android:id="@+id/imageView_amazon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200px"
+                android:layout_height="200px"
                 android:paddingLeft="2dip"
-                android:paddingRight="5dip" android:src="@drawable/amazon_logo_2"/>
+                android:paddingRight="5dip" android:src="@drawable/amazon_logo_2"
+                android:layout_marginLeft="20px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -104,10 +106,11 @@
 
         <TableRow android:layout_marginTop="20px">
             <ImageView android:id="@+id/imageView_maxdome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200px"
+                android:layout_height="200px"
                 android:paddingLeft="2dip"
-                android:paddingRight="5dip" android:src="@drawable/maxdome_icon"/>
+                android:paddingRight="5dip" android:src="@drawable/maxdome_icon"
+                android:layout_marginLeft="20px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -141,10 +144,11 @@
 
         <TableRow android:layout_marginTop="20px">
             <ImageView android:id="@+id/imageView_snap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200px"
+                android:layout_height="200px"
                 android:paddingLeft="2dip"
-                android:paddingRight="5dip" android:src="@drawable/snap_icon"/>
+                android:paddingRight="5dip" android:src="@drawable/snap_icon"
+                android:layout_marginLeft="20px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
