@@ -26,6 +26,14 @@ public class ContentDetailActivity extends AppCompatActivity {
     ImageView moviePosterContainer;
     Bitmap moviePoster;
     String userString;
+    Integer netflix;
+    Integer amazon;
+    Integer maxdome;
+    Integer snap;
+    ImageView netflixLogo;
+    ImageView amazonLogo;
+    ImageView maxdomeLogo;
+    ImageView snapLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +70,32 @@ public class ContentDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.contentdetail_laufzeit)).setText(content.getLaufzeit());
         ((TextView) findViewById(R.id.contentdetail_imdbscore)).setText(content.getImdbScore());
         ((TextView) findViewById(R.id.contentdetail_jahr)).setText(content.getJahr());
+
+        netflixLogo = (ImageView) findViewById(R.id.imageView_contentdetail_netflix);
+        amazonLogo = (ImageView) findViewById(R.id.imageView_contentdetail_amazon);
+        maxdomeLogo = (ImageView) findViewById(R.id.imageView_contentdetail_maxdome);
+        snapLogo = (ImageView) findViewById(R.id.imageView_contentdetail_snap);
+
+        netflix = content.getNetflix();
+        if (netflix == 1){
+            int netflixId = getResources().getIdentifier("hska.streamingblitzv2:drawable/netflix_icon", null, null);
+            netflixLogo.setImageResource(netflixId);
+        }
+        amazon = content.getAmazon();
+        if (amazon == 1){
+            int amazonId = getResources().getIdentifier("hska.streamingblitzv2:drawable/amazon_logo_2", null, null);
+            amazonLogo.setImageResource(amazonId);
+        }
+        maxdome = content.getMaxdome();
+        if (maxdome == 1){
+            int maxdomeId = getResources().getIdentifier("hska.streamingblitzv2:drawable/maxdome_icon", null, null);
+            maxdomeLogo.setImageResource(maxdomeId);
+        }
+        snap = content.getSnap();
+        if (snap == 1){
+            int snapId = getResources().getIdentifier("hska.streamingblitzv2:drawable/snap_icon", null, null);
+            snapLogo.setImageResource(snapId);
+        }
     }
 
     @Override

@@ -228,8 +228,7 @@
                     <ImageView
                         android:layout_width="150px"
                         android:layout_height="150px"
-                        android:id="@+id/imageView8"
-                        android:src="@drawable/amazon_logo_2" />
+                        android:id="@+id/imageView_contentdetail_amazon" />
 
                     <Space
                         android:layout_width="100px"
@@ -238,8 +237,7 @@
                     <ImageView
                         android:layout_width="150px"
                         android:layout_height="150px"
-                        android:id="@+id/imageView5"
-                        android:src="@drawable/netflix_icon" />
+                        android:id="@+id/imageView_contentdetail_netflix" />
 
                     <Space
                         android:layout_width="100px"
@@ -248,8 +246,7 @@
                     <ImageView
                         android:layout_width="150px"
                         android:layout_height="150px"
-                        android:id="@+id/imageView7"
-                        android:src="@drawable/maxdome_icon" />
+                        android:id="@+id/imageView_contentdetail_maxdome" />
 
                     <Space
                         android:layout_width="100px"
@@ -258,8 +255,7 @@
                     <ImageView
                         android:layout_width="150px"
                         android:layout_height="150px"
-                        android:id="@+id/imageView9"
-                        android:src="@drawable/snap_icon" />
+                        android:id="@+id/imageView_contentdetail_snap" />
 
                 </LinearLayout>
 
