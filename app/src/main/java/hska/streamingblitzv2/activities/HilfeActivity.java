@@ -55,9 +55,6 @@ public class HilfeActivity extends AppCompatActivity {
             case R.id.menu_hilfe:
                 showHilfe();
                 break;
-            case R.id.menu_einstellungen:
-                showEinstellungen();
-                break;
 
             default:
                 break;
@@ -83,10 +80,4 @@ public class HilfeActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    protected void showEinstellungen()
-    {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
-    }
 }

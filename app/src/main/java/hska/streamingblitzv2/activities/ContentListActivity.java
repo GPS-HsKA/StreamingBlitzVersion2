@@ -35,6 +35,7 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
     private int backButtonCount = 0;
     private String query;
     private String userString;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,8 +212,10 @@ public class ContentListActivity extends AppCompatActivity implements LoaderMana
 
     protected void showEinstellungen()
     {
-        Intent einstellungenIntent = new Intent(ContentListActivity.this, EinstellungenActivity.class);
-        einstellungenIntent.putExtra("EXTRA_USER", userString);
-        startActivity(einstellungenIntent);
+        Intent intentEinstellungen = new Intent(this, EinstellungenActivity.class);
+        extras = new Bundle();
+        extras.putString("EXTRA_USER", userString);
+        intentEinstellungen.putExtras(extras);
+        startActivity(intentEinstellungen);
     }
 }

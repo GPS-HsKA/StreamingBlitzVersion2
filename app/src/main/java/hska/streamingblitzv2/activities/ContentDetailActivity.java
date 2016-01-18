@@ -34,6 +34,7 @@ public class ContentDetailActivity extends AppCompatActivity {
     ImageView amazonLogo;
     ImageView maxdomeLogo;
     ImageView snapLogo;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,8 +157,10 @@ public class ContentDetailActivity extends AppCompatActivity {
 
     protected void showEinstellungen()
     {
-        Intent einstellungenIntent = new Intent(ContentDetailActivity.this, EinstellungenActivity.class);
-        einstellungenIntent.putExtra("EXTRA_USER", userString);
-        startActivity(einstellungenIntent);
+        Intent intentEinstellungen = new Intent(this, EinstellungenActivity.class);
+        extras = new Bundle();
+        extras.putString("EXTRA_USER", userString);
+        intentEinstellungen.putExtras(extras);
+        startActivity(intentEinstellungen);
     }
 }

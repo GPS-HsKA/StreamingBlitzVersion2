@@ -27,11 +27,16 @@ public class DatenbankActivity extends AppCompatActivity implements LoaderManage
 
     private SimpleCursorAdapter adapter;
     private ListView contentList;
+    Bundle extras;
+    String userString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datenbank);
+
+        Intent intent = getIntent();
+        userString = intent.getStringExtra(SucheActivity.EXTRA_MESSAGE);
 
         initAdapter();
 
@@ -141,8 +146,11 @@ public class DatenbankActivity extends AppCompatActivity implements LoaderManage
 
     protected void showEinstellungen()
     {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
+        Intent intentEinstellungen = new Intent(this, EinstellungenActivity.class);
+        extras = new Bundle();
+        extras.putString("EXTRA_USER", userString);
+        intentEinstellungen.putExtras(extras);
+        startActivity(intentEinstellungen);
 
     }
 }

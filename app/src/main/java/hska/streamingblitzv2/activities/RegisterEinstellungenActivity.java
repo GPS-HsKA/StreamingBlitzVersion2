@@ -73,15 +73,12 @@ public class RegisterEinstellungenActivity extends AppCompatActivity {
             Einstellungen i = dbAdapter.insertEinstellungen(einstellungen);
             if (i == einstellungen)
                 Toast.makeText(RegisterEinstellungenActivity.this, "Einstellung wurde angelegt", Toast.LENGTH_LONG).show();
+                showSuche();
 
         } catch (Exception e) {
             Toast.makeText(RegisterEinstellungenActivity.this, "Etwas lief schief!",
                     Toast.LENGTH_LONG).show();
         }
-        Intent intent = new Intent(this, SucheActivity.class);
-        String message = userString;
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -103,4 +100,10 @@ public class RegisterEinstellungenActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    protected void showSuche(){
+        Intent intent = new Intent(this, SucheActivity.class);
+        String message = userString;
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
 }

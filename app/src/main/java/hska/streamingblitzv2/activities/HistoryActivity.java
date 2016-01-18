@@ -56,9 +56,6 @@ public class HistoryActivity extends AppCompatActivity {
             case R.id.menu_hilfe:
                 showHilfe();
                 break;
-            case R.id.menu_einstellungen:
-                showEinstellungen();
-                break;
 
             default:
                 break;
@@ -82,12 +79,5 @@ public class HistoryActivity extends AppCompatActivity {
     {
         Intent i = new Intent(this, HilfeActivity.class);
         startActivity(i);
-    }
-
-    protected void showEinstellungen()
-    {
-        Intent i = new Intent(this, EinstellungenActivity.class);
-        startActivity(i);
-
     }
 }
